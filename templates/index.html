@@ -18,6 +18,29 @@
 {#            <p>请先 <a href="{{ url_for('login') }}" class="button">登录</a></p>#}
 {#        </div>#}
 {#    {% endif %}#}
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 0 20px 0 20px;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .position {
+            margin-bottom: 12px;
+        }
+        .metric {
+            margin-top: 12px;
+        }
+        .pagination {
+            margin-top: 30px;  /* 增加顶部的空隙 */
+            margin-bottom: 30px; /* 增加底部的空隙 */
+            padding: 10px 0;  /* 增加上下的内边距 */
+            text-align: center;
+        }
+        </style>
 
     <div class="player-container">
         {% for player in players %}
@@ -25,7 +48,8 @@
             <img src="{{ url_for('static', filename='avatar/' + player['avatar']) }}" alt="头像" width="150">
 {#            <img src="{{ player.avatar }}" alt="Avatar">#}
             <h3>{{ player.name }}</h3>
-            <p>Position: {{ player.position }}</p>
+            <p class="position">Position: {{ player.position }}</p>
+            <p class="metric">正负值: {{ player.pos_neg }}</p>
             <canvas id="radarChart{{ player.id }}" width="200" height="200"></canvas>
             <button onclick="location.href='{{ url_for('rcbaplayer.player_show', player_id=player.id) }}'">View Details</button>
         </div>
@@ -67,5 +91,13 @@
             });
         });
     </script>
+    <div class="pagination">
+        {% if page > 1 %}
+            <a href="{{ url_for('rcbaplayer.index',  page=page-1 ) }}">上一页</a>
+        {% endif %}
+        {% if page * per_page < total_players %}
+            <a href="{{ url_for('rcbaplayer.index', page=page+1 ) }}">下一页</a>
+        {% endif %}
+    </div>
 </body>
 </html>

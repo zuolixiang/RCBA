@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ player.name }} - Details</title>
+
 </head>
 
 <body>
@@ -13,12 +14,14 @@
     <form method="POST">
         <label for="position">Position:</label>
         <select name="position" id="position">
-            <option value="控卫" {% if player.position == '控卫' %}selected{% endif %}>控卫</option>
-            <option value="得分卫" {% if player.position == '得分卫' %}selected{% endif %}>得分卫</option>
-            <option value="小前" {% if player.position == '小前' %}selected{% endif %}>小前</option>
-            <option value="大前" {% if player.position == '大前' %}selected{% endif %}>大前</option>
+            <option value="控球后卫" {% if player.position == '控球后卫' %}selected{% endif %}>控球后卫</option>
+            <option value="得分后卫" {% if player.position == '得分后卫' %}selected{% endif %}>得分后卫</option>
+            <option value="小前锋" {% if player.position == '小前锋' %}selected{% endif %}>小前锋</option>
+            <option value="大前锋" {% if player.position == '大前锋' %}selected{% endif %}>大前锋</option>
             <option value="中锋" {% if player.position == '中锋' %}selected{% endif %}>中锋</option>
         </select><br>
+        <label for="pos_neg">正负值:</label>
+        <input type="number" name="pos_neg" id="pos_neg" value="{{ player.pos_neg }}" min="-10000" max="10000"><br>
         <label for="defense">防守:</label>
         <input type="number" name="defense" id="defense" value="{{ player.skills.defense }}" min="0" max="100"><br>
         <label for="offense">进攻:</label>

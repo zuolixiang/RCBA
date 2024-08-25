@@ -26,15 +26,25 @@ def save_players(players):
     with open(current_file_path + '/../data/players.json', 'w', encoding='utf8') as file:
         json.dump({"players": players}, file, indent=4, ensure_ascii=False)
 
-
 players = load_players()
-
 
 @rcbaplayer.route('/')
 def index():
     if 'username' not in session:
         return redirect(url_for('rcbaplayer.login'))
-    return render_template('index.html', players=players)
+    page = request.args.get('page', 1, type=int)
+    per_page = 8
+    total_players = len(players)
+    paginated_players = players[(page - 1) * per_page: page * per_page]
+    context = {
+        "players": paginated_players,
+        "total_players": total_players,
+        "per_page": per_page,
+        "page": page,
+    }
+
+    # return render_template('index.html', players=paginated_players, page=page, per_page=per_page, total_players=total_players)
+    return render_template('index.html', **context)
 
 # Player details and update route
 @rcbaplayer.route('/player/<int:player_id>', methods=['GET', 'POST'])
@@ -48,6 +58,7 @@ def player_show(player_id):
             print(request.form)
             try:
                 position = request.form['position']
+                pos_neg = request.form['pos_neg']
                 defense = int(request.form.get('defense', 0))
                 offense = int(request.form.get('offense', 0))
                 shooting = int(request.form.get('shooting', 0))
@@ -59,6 +70,7 @@ def player_show(player_id):
                 if not all(0 <= value <= 100 for value in [defense, offense, shooting, speed, stamina, charisma]):
                     return "Values must be between 0 and 100", 400
                 player['position'] = position
+                player['pos_neg'] = pos_neg
                 player['skills'] = {
                     "defense": defense,
                     "offense": offense,
@@ -76,12 +88,6 @@ def player_show(player_id):
             return "对不起，你只能修改自己的信息！", 403
 
     return render_template('playershow.html', player=player)
-
-# Login route
-# @rcbaplayers.route('/login/<int:player_id>')
-# def login(player_id):
-#     session['user_id'] = player_id
-#     return redirect(url_for('index'))
 
 
 @rcbaplayer.route('/login', methods=['GET', 'POST'])

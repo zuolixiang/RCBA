@@ -3,10 +3,11 @@
         {
             "id": 1,
             "name": "潘栋恒",
-            "avatar": "乔丹.png",
-            "position": "控卫",
+            "avatar": "1乔丹.png",
+            "position": "得分后卫",
+            "pos_neg": "10000",
             "skills": {
-                "defense": 90,
+                "defense": 100,
                 "offense": 100,
                 "shooting": 100,
                 "speed": 100,
@@ -17,38 +18,41 @@
         {
             "id": 2,
             "name": "陆智卿",
-            "avatar": "https://via.placeholder.com/100",
-            "position": "得分卫",
+            "avatar": "2雷吉米勒.png",
+            "position": "得分后卫",
+            "pos_neg": 100,
             "skills": {
-                "defense": 60,
+                "defense": 90,
                 "offense": 90,
                 "shooting": 85,
-                "speed": 80,
-                "stamina": 70,
-                "charisma": 75
+                "speed": 90,
+                "stamina": 85,
+                "charisma": 80
             }
         },
         {
             "id": 3,
-            "name": "",
-            "avatar": "https://via.placeholder.com/100",
-            "position": "中锋",
+            "name": "申时行",
+            "avatar": "3藤真健司.png",
+            "position": "控球后卫",
+            "pos_neg": 100,
             "skills": {
-                "defense": 60,
+                "defense": 90,
                 "offense": 90,
                 "shooting": 85,
-                "speed": 80,
-                "stamina": 70,
-                "charisma": 75
+                "speed": 85,
+                "stamina": 85,
+                "charisma": 90
             }
         },
         {
             "id": 4,
-            "name": "Player 4",
-            "avatar": "https://via.placeholder.com/100",
+            "name": "蓝启嵩",
+            "avatar": "4樱木花道.png",
             "position": "小前锋",
+            "pos_neg": 100,
             "skills": {
-                "defense": 60,
+                "defense": 85,
                 "offense": 90,
                 "shooting": 85,
                 "speed": 80,
@@ -58,37 +62,190 @@
         },
         {
             "id": 5,
-            "name": "Player 5",
-            "avatar": "https://via.placeholder.com/100",
-            "position": "控卫",
+            "name": "王明斌",
+            "avatar": "5詹姆斯.png",
+            "position": "大前锋",
+            "pos_neg": 100,
             "skills": {
-                "defense": 70,
-                "offense": 80,
-                "shooting": 75,
-                "speed": 85,
-                "stamina": 90,
-                "charisma": 65
+                "defense": 95,
+                "offense": 95,
+                "shooting": 100,
+                "speed": 95,
+                "stamina": 100,
+                "charisma": 100
             }
         },
         {
             "id": 6,
-            "name": "Player 6",
-            "avatar": "https://via.placeholder.com/100",
-            "position": "得分卫",
+            "name": "赵康伉",
+            "avatar": "6杜兰特.png",
+            "position": "小前锋",
+            "pos_neg": 100,
             "skills": {
-                "defense": 60,
-                "offense": 90,
-                "shooting": 85,
-                "speed": 80,
-                "stamina": 70,
-                "charisma": 75
+                "defense": 99,
+                "offense": 100,
+                "shooting": 99,
+                "speed": 100,
+                "stamina": 100,
+                "charisma": 90
             }
         },
         {
             "id": 7,
-            "name": "Player 7",
-            "avatar": "https://via.placeholder.com/100",
+            "name": "隗功晖",
+            "avatar": "7约翰逊.png",
+            "position": "控球后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 95,
+                "offense": 99,
+                "shooting": 95,
+                "speed": 95,
+                "stamina": 90,
+                "charisma": 85
+            }
+        },
+        {
+            "id": 8,
+            "name": "曲明钰",
+            "avatar": "8伦纳德.png",
+            "position": "小前锋",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 95,
+                "offense": 95,
+                "shooting": 92,
+                "speed": 96,
+                "stamina": 90,
+                "charisma": 90
+            }
+        },
+        {
+            "id": 9,
+            "name": "王光纯",
+            "avatar": "9宫城良田.png",
+            "position": "控球后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 85,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 80,
+                "charisma": 85
+            }
+        },
+        {
+            "id": 10,
+            "name": "高明",
+            "avatar": "10塔图姆.png",
+            "position": "小前锋",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 85,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 90,
+                "charisma": 85
+            }
+        },
+        {
+            "id": 11,
+            "name": "屈俊夫",
+            "avatar": "11花形透.png",
             "position": "中锋",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 88,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 90,
+                "stamina": 86,
+                "charisma": 85
+            }
+        },
+        {
+            "id": 12,
+            "name": "赵永会",
+            "avatar": "12库里.png",
+            "position": "得分后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 95,
+                "offense": 90,
+                "shooting": 95,
+                "speed": 85,
+                "stamina": 85,
+                "charisma": 85
+            }
+        },
+        {
+            "id": 13,
+            "name": "李奇",
+            "avatar": "13帕克.png",
+            "position": "控球后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 95,
+                "offense": 95,
+                "shooting": 90,
+                "speed": 95,
+                "stamina": 85,
+                "charisma": 85
+            }
+        },
+        {
+            "id": 14,
+            "name": "翟赫然",
+            "avatar": "14保罗乔治.png",
+            "position": "小前锋",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 85,
+                "offense": 93,
+                "shooting": 85,
+                "speed": 85,
+                "stamina": 90,
+                "charisma": 85
+            }
+        },
+        {
+            "id": 15,
+            "name": "庞义卓",
+            "avatar": "15阿神.png",
+            "position": "中锋",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 90,
+                "offense": 90,
+                "shooting": 95,
+                "speed": 85,
+                "stamina": 80,
+                "charisma": 85
+            }
+        },
+        {
+            "id": 16,
+            "name": "杨海力",
+            "avatar": "16樱木.png",
+            "position": "得分后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 90,
+                "offense": 60,
+                "shooting": 65,
+                "speed": 85,
+                "stamina": 90,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 17,
+            "name": "赵宏阳",
+            "avatar": "17加索尔.png",
+            "position": "大前锋",
+            "pos_neg": 100,
             "skills": {
                 "defense": 60,
                 "offense": 90,
@@ -99,10 +256,236 @@
             }
         },
         {
-            "id": 8,
-            "name": "Player 8",
-            "avatar": "https://via.placeholder.com/100",
+            "id": 18,
+            "name": "赵建凯",
+            "avatar": "18诺维茨基.png",
+            "position": "中锋",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 19,
+            "name": "王南",
+            "avatar": "19巴克利.png",
+            "position": "大前锋",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 20,
+            "name": "邹越",
+            "avatar": "20瓦格纳.png",
             "position": "小前锋",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 21,
+            "name": "王文芳",
+            "avatar": "21吉诺比利.png",
+            "position": "得分后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 22,
+            "name": "李光",
+            "avatar": "22哈登.png",
+            "position": "得分后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 99,
+                "offense": 90,
+                "shooting": 95,
+                "speed": 90,
+                "stamina": 70,
+                "charisma": 100
+            }
+        },
+        {
+            "id": 23,
+            "name": "冉孟鑫",
+            "avatar": "23高砂一马.png",
+            "position": "中锋",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 24,
+            "name": "冯睿敏",
+            "avatar": "24汤普森.png",
+            "position": "得分后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 25,
+            "name": "徐林",
+            "avatar": "25雷阿伦.png",
+            "position": "得分后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 26,
+            "name": "李平",
+            "avatar": "26特雷杨.png",
+            "position": "得分后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 27,
+            "name": "孙健",
+            "avatar": "27德罗赞.png",
+            "position": "得分后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 28,
+            "name": "王慧龙",
+            "avatar": "28字母哥.png",
+            "position": "小前锋",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 80,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 30,
+                "charisma": 100
+            }
+        },
+        {
+            "id": 29,
+            "name": "费远",
+            "avatar": "29保罗.png",
+            "position": "控球后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 30,
+            "name": "宋欣航",
+            "avatar": "30南烈.png",
+            "position": "控球后卫",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 31,
+            "name": "薛展",
+            "avatar": "31仙道彰.png",
+            "position": "小前锋",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 32,
+            "name": "陶曦",
+            "avatar": "32考辛斯.png",
+            "position": "中锋",
+            "pos_neg": 100,
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 33,
+            "name": "程诚",
+            "avatar": "33鱼柱纯.png",
+            "position": "中锋",
+            "pos_neg": 100,
             "skills": {
                 "defense": 60,
                 "offense": 90,
