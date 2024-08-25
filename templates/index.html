@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basketball Players</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>RCBA Basketball Players</h1>
+
+{#    {% if current_user.is_authenticated %}#}
+{#        <div class="user-info">#}
+{#            <p>当前用户: {{ current_user.username }}</p>#}
+{#            <a href="{{ url_for('logout') }}" class="button">登出</a>#}
+{#        </div>#}
+{#    {% else %}#}
+{#        <div class="user-info">#}
+{#            <p>请先 <a href="{{ url_for('login') }}" class="button">登录</a></p>#}
+{#        </div>#}
+{#    {% endif %}#}
+
+    <div class="player-container">
+        {% for player in players %}
+        <div class="player-card">
+            <img src="{{ url_for('static', filename='avatar/' + player['avatar']) }}" alt="头像" width="150">
+{#            <img src="{{ player.avatar }}" alt="Avatar">#}
+            <h3>{{ player.name }}</h3>
+            <p>Position: {{ player.position }}</p>
+            <canvas id="radarChart{{ player.id }}" width="200" height="200"></canvas>
+            <button onclick="location.href='{{ url_for('rcbaplayer.player_show', player_id=player.id) }}'">View Details</button>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const players = {{ players | tojson }};
+        players.forEach(player => {
+            const ctx = document.getElementById('radarChart' + player.id).getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['防守', '进攻', '投射', '速度', '体力', '魅力'],
+                    datasets: [{
+                        label: player.name,
+                        data: [
+                            player.skills.defense,
+                            player.skills.offense,
+                            player.skills.shooting,
+                            player.skills.speed,
+                            player.skills.stamina,
+                            player.skills.charisma
+                        ],
+                        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                        borderColor: 'rgba(0, 123, 255, 1)',
+                        pointBackgroundColor: 'rgba(0, 123, 255, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

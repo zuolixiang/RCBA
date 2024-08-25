@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ player.name }} - Details</title>
+</head>
+
+<body>
+    <h2>{{ player.name }} - Details</h2>
+    <img src="{{ url_for('static', filename='avatar/' + player['avatar']) }}" alt="头像" width="150">
+{#    <img src="{{ player.avatar }}" alt="Avatar">#}
+    <p>Position: {{ player.position }}</p>
+    <form method="POST">
+        <label for="position">Position:</label>
+        <select name="position" id="position">
+            <option value="控卫" {% if player.position == '控卫' %}selected{% endif %}>控卫</option>
+            <option value="得分卫" {% if player.position == '得分卫' %}selected{% endif %}>得分卫</option>
+            <option value="小前" {% if player.position == '小前' %}selected{% endif %}>小前</option>
+            <option value="大前" {% if player.position == '大前' %}selected{% endif %}>大前</option>
+            <option value="中锋" {% if player.position == '中锋' %}selected{% endif %}>中锋</option>
+        </select><br>
+        <label for="defense">防守:</label>
+        <input type="number" name="defense" id="defense" value="{{ player.skills.defense }}" min="0" max="100"><br>
+        <label for="offense">进攻:</label>
+        <input type="number" name="offense" id="offense" value="{{ player.skills.offense }}" min="0" max="100"><br>
+        <label for="shooting">投射:</label>
+        <input type="number" name="shooting" id="shooting" value="{{ player.skills.shooting }}" min="0" max="100"><br>
+        <label for="speed">速度:</label>
+        <input type="number" name="speed" id="speed" value="{{ player.skills.speed }}" min="0" max="100"><br>
+        <label for="stamina">体力:</label>
+        <input type="number" name="stamina" id="stamina" value="{{ player.skills.stamina }}" min="0" max="100"><br>
+        <label for="charisma">魅力:</label>
+        <input type="number" name="charisma" id="charisma" value="{{ player.skills.charisma }}" min="0" max="100"><br>
+        <button type="submit">Update</button>
+    </form>
+    <button onclick="location.href='{{ url_for('rcbaplayer.index') }}'">Back to list</button>
+</body>
+</html>

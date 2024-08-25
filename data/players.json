@@ -1,0 +1,116 @@
+{
+    "players": [
+        {
+            "id": 1,
+            "name": "潘栋恒",
+            "avatar": "乔丹.png",
+            "position": "控卫",
+            "skills": {
+                "defense": 90,
+                "offense": 100,
+                "shooting": 100,
+                "speed": 100,
+                "stamina": 100,
+                "charisma": 100
+            }
+        },
+        {
+            "id": 2,
+            "name": "陆智卿",
+            "avatar": "https://via.placeholder.com/100",
+            "position": "得分卫",
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 3,
+            "name": "",
+            "avatar": "https://via.placeholder.com/100",
+            "position": "中锋",
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 4,
+            "name": "Player 4",
+            "avatar": "https://via.placeholder.com/100",
+            "position": "小前锋",
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 5,
+            "name": "Player 5",
+            "avatar": "https://via.placeholder.com/100",
+            "position": "控卫",
+            "skills": {
+                "defense": 70,
+                "offense": 80,
+                "shooting": 75,
+                "speed": 85,
+                "stamina": 90,
+                "charisma": 65
+            }
+        },
+        {
+            "id": 6,
+            "name": "Player 6",
+            "avatar": "https://via.placeholder.com/100",
+            "position": "得分卫",
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 7,
+            "name": "Player 7",
+            "avatar": "https://via.placeholder.com/100",
+            "position": "中锋",
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        },
+        {
+            "id": 8,
+            "name": "Player 8",
+            "avatar": "https://via.placeholder.com/100",
+            "position": "小前锋",
+            "skills": {
+                "defense": 60,
+                "offense": 90,
+                "shooting": 85,
+                "speed": 80,
+                "stamina": 70,
+                "charisma": 75
+            }
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h1 {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.player-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px; /* 限制容器最大宽度 */
+    margin: 0 auto; /* 居中对齐容器 */
+}
+
+.player-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px; /* 增加内边距 */
+    width: 250px;  /* 调整卡片宽度 */
+    text-align: center;
+}
+
+.player-card img {
+    border-radius: 50%;
+    width: 100px;   /* 调整头像大小 */
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.player-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;  /* 调整标题字体大小 */
+}
+
+.player-card button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px; /* 增加按钮大小 */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;  /* 调整按钮文字大小 */
+}
+
+.player-card button:hover {
+    background-color: #0056b3;
+}
