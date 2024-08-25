@@ -1,3 +1,6 @@
 *.log
 .idea
 *.jpg/png
+*.json
+__pycache__/
+*/__pycache__/
