@@ -20,8 +20,9 @@
             <option value="大前锋" {% if player.position == '大前锋' %}selected{% endif %}>大前锋</option>
             <option value="中锋" {% if player.position == '中锋' %}selected{% endif %}>中锋</option>
         </select><br>
-        <label for="pos_neg">正负值:</label>
-        <input type="number" name="pos_neg" id="pos_neg" value="{{ player.pos_neg }}" min="-10000" max="10000"><br>
+        <label for="pos_neg">湖力值: {{ player.skills.defense*0.2 + player.skills.offense*0.15 + player.skills.shooting*0.15 + player.skills.speed*0.1
+                + player.skills.stamina*0.15 + player.skills.charisma * 0.25 }}</label><br>
+{#        <input type="number" name="pos_neg" id="pos_neg" value="{{ player.pos_neg }}" min="-10000" max="10000"><br>#}
         <label for="defense">防守:</label>
         <input type="number" name="defense" id="defense" value="{{ player.skills.defense }}" min="0" max="100"><br>
         <label for="offense">进攻:</label>

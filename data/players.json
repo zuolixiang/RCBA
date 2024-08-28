@@ -27,7 +27,7 @@
                 "shooting": 85,
                 "speed": 90,
                 "stamina": 85,
-                "charisma": 80
+                "charisma": 81
             }
         },
         {
@@ -152,7 +152,7 @@
         },
         {
             "id": 11,
-            "name": "屈俊夫",
+            "name": "屈骏夫",
             "avatar": "11花形透.png",
             "position": "中锋",
             "pos_neg": 100,

@@ -56,3 +56,16 @@ h1 {
 .player-card button:hover {
     background-color: #0056b3;
 }
+
+.comparison-selectors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.comparison-selectors select, .comparison-selectors button {
+    margin: 0 10px;
+    padding: 10px;
+    font-size: 16px;
+}

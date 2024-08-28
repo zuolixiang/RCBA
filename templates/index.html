@@ -7,17 +7,6 @@
 </head>
 <body>
     <h1>RCBA Basketball Players</h1>
-
-{#    {% if current_user.is_authenticated %}#}
-{#        <div class="user-info">#}
-{#            <p>当前用户: {{ current_user.username }}</p>#}
-{#            <a href="{{ url_for('logout') }}" class="button">登出</a>#}
-{#        </div>#}
-{#    {% else %}#}
-{#        <div class="user-info">#}
-{#            <p>请先 <a href="{{ url_for('login') }}" class="button">登录</a></p>#}
-{#        </div>#}
-{#    {% endif %}#}
         <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,6 +16,32 @@
         }
         h1 {
             margin-top: 0;
+        }
+        .navbar {
+            position: absolute; /* 使用绝对定位 */
+            top: 60px; /* 距离页面顶部的距离 */
+            right: 20px; /* 距离页面右侧的距离 */
+            background-color: #333; /* 导航栏背景颜色 */
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .navbar-right {
+            display: inline-block;
+        }
+        .navbar-right span {
+            color: white;
+            margin-right: 10px;
+        }
+        .navbar-right button {
+            color: white;
+            background-color: #555;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .navbar-right button:hover {
+            background-color: #777;
         }
         .position {
             margin-bottom: 12px;
@@ -40,7 +55,43 @@
             padding: 10px 0;  /* 增加上下的内边距 */
             text-align: center;
         }
+        .comparison-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .comparison-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comparison-container button:hover {
+            background-color: #0056b3;
+        }
         </style>
+
+    <div class="navbar">
+        <div class="navbar-right">
+            {% if session.get('username') %}
+                <span> 用户: {{ session['username'] }}</span>
+                <button onclick="location.href='{{ url_for('rcbaplayer.logout') }}'">退出</button>
+            {% else %}
+                <button onclick="location.href='{{ url_for('rcbaplayer.login') }}'">登录</button>
+            {% endif %}
+        </div>
+    </div>
+
+    {# 球星对比入口   #}
+    {% if session.get('username') %}
+    <div class="comparison-container">
+        <button onclick="location.href='{{ url_for('rcbaplayer.compare_players') }}'">球星对比</button>
+    </div>
+    {% endif %}
 
     <div class="player-container">
         {% for player in players %}
@@ -49,7 +100,8 @@
 {#            <img src="{{ player.avatar }}" alt="Avatar">#}
             <h3>{{ player.name }}</h3>
             <p class="position">Position: {{ player.position }}</p>
-            <p class="metric">正负值: {{ player.pos_neg }}</p>
+            <p class="metric">湖力值: {{ player.skills.defense*0.2 + player.skills.offense*0.15 + player.skills.shooting*0.15 + player.skills.speed*0.1
+                + player.skills.stamina*0.15 + player.skills.charisma * 0.25 }} </p>
             <canvas id="radarChart{{ player.id }}" width="200" height="200"></canvas>
             <button onclick="location.href='{{ url_for('rcbaplayer.player_show', player_id=player.id) }}'">View Details</button>
         </div>

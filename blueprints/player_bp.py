@@ -7,7 +7,7 @@
 @FILENAME: player_bp
 """
 
-from flask import render_template, request, redirect, url_for, session, Blueprint
+from flask import render_template, request, redirect, url_for, session, Blueprint, jsonify
 import json
 import os
 
@@ -30,8 +30,8 @@ players = load_players()
 
 @rcbaplayer.route('/')
 def index():
-    if 'username' not in session:
-        return redirect(url_for('rcbaplayer.login'))
+    # if 'username' not in session:
+    #     return redirect(url_for('rcbaplayer.login'))
     page = request.args.get('page', 1, type=int)
     per_page = 8
     total_players = len(players)
@@ -58,7 +58,7 @@ def player_show(player_id):
             print(request.form)
             try:
                 position = request.form['position']
-                pos_neg = request.form['pos_neg']
+                # pos_neg = request.form['pos_neg']
                 defense = int(request.form.get('defense', 0))
                 offense = int(request.form.get('offense', 0))
                 shooting = int(request.form.get('shooting', 0))
@@ -70,7 +70,7 @@ def player_show(player_id):
                 if not all(0 <= value <= 100 for value in [defense, offense, shooting, speed, stamina, charisma]):
                     return "Values must be between 0 and 100", 400
                 player['position'] = position
-                player['pos_neg'] = pos_neg
+                # player['pos_neg'] = pos_neg
                 player['skills'] = {
                     "defense": defense,
                     "offense": offense,
@@ -88,6 +88,37 @@ def player_show(player_id):
             return "对不起，你只能修改自己的信息！", 403
 
     return render_template('playershow.html', player=player)
+
+
+@rcbaplayer.route('/compare')
+def compare_players():
+    if 'username' not in session:
+        return redirect(url_for('rcbaplayer.login'))
+    return render_template('compare.html', players=players)
+
+
+@rcbaplayer.route('/compare/<int:player1_id>/<int:player2_id>')
+def get_comparison_data(player1_id, player2_id):
+    player1 = next((player for player in players if player['id'] == player1_id), None)
+    player2 = next((player for player in players if player['id'] == player2_id), None)
+
+    if player1 and player2:
+        data = {
+            'player1': {
+                'name': player1['name'],
+                'stats': [player1['skills']['defense'], player1['skills']['offense'], player1['skills']['shooting'],
+                          player1['skills']['speed'], player1['skills']['stamina'], player1['skills']['charisma']]
+            },
+            'player2': {
+                'name': player2['name'],
+                'stats': [player2['skills']['defense'], player2['skills']['offense'], player2['skills']['shooting'],
+                          player2['skills']['speed'], player2['skills']['stamina'], player2['skills']['charisma']]
+            }
+        }
+        return jsonify(data)
+    else:
+        return jsonify({'error': 'Player not found'}), 404
+
 
 
 @rcbaplayer.route('/login', methods=['GET', 'POST'])

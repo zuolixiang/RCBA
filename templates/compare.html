@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>球星对比</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>球星对比</h2>
+
+    <div class="comparison-container">
+        <label for="player1">选择球员1:</label>
+        <select id="player1">
+            {% for player in players %}
+                <option value="{{ player.name }}">{{ player.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="player2">选择球员2:</label>
+        <select id="player2">
+            {% for player in players %}
+                <option value="{{ player.name }}">{{ player.name }}</option>
+            {% endfor %}
+        </select>
+
+        <button id="compareButton">PK</button>
+    </div>
+
+    <canvas id="tornadoChart" width="600" height="400"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const players = {{ players | tojson }};
+        let chartInstance;  // 变量来保存图表实例
+
+        document.getElementById('compareButton').addEventListener('click', function() {
+            const player1Name = document.getElementById('player1').value;
+            const player2Name = document.getElementById('player2').value;
+
+            const player1 = players.find(player => player.name === player1Name);
+            const player2 = players.find(player => player.name === player2Name);
+
+            const labels = ['防守', '进攻', '投射', '速度', '体力', '魅力'];
+            const player1Data = [
+                player1.skills.defense,
+                player1.skills.offense,
+                player1.skills.shooting,
+                player1.skills.speed,
+                player1.skills.stamina,
+                player1.skills.charisma
+            ];
+            const player2Data = [
+                player2.skills.defense,
+                player2.skills.offense,
+                player2.skills.shooting,
+                player2.skills.speed,
+                player2.skills.stamina,
+                player2.skills.charisma
+            ];
+
+            const ctx = document.getElementById('tornadoChart').getContext('2d');
+
+            // 检查是否已有图表实例存在，如果有则销毁它
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            // 用于图表的偏移量
+            const offset = 0.5; // 轻微偏移量
+
+            const player1DataModified = player1Data.map((value, index) => value > player2Data[index] ? value: -value );
+            const player2DataModified = player2Data.map((value, index) => value >= player1Data[index] ? value: -value );
+
+            // 创建新的图表实例
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: player1.name,
+                            data: player1DataModified,
+                            backgroundColor: player1Data.map((value, index) => value > player2Data[index] ? 'rgba(0, 123, 255, 0.7)' : 'rgba(128, 128, 128, 0.7)'),
+                        },
+                        {
+                            label: player2.name,
+                            data: player2DataModified,
+                            backgroundColor: player2Data.map((value, index) => value >= player1Data[index] ? 'rgba(0, 123, 255, 0.7)' : 'rgba(128, 128, 128, 0.7)'),
+                        }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            stacked: true,
+                            min: -100,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return Math.abs(value);
+                                }
+                            }
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.dataset.label + ': ' + Math.abs(tooltipItem.raw);
+                                }
+                            }
+                        }
+                    },
+                    categoryPercentage: 0.4, // 调整类别宽度
+                    barPercentage: 0.6 // 调整条形图宽度
+                }
+            });
+        });
+
+        // 初始化默认选中的两个球星
+        document.getElementById('compareButton').click();
+    </script>
+</body>
+</html>

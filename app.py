@@ -3,6 +3,7 @@ from blueprints.player_bp import rcbaplayer
 
 app = Flask(__name__)
 app.secret_key = "fbdsijfdlshgk3827r9"
+
 app.register_blueprint(rcbaplayer)
 
 
