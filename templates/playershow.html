@@ -3,40 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ player.name }} - Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 80%;
+            text-align: center;
+        }
+        h2 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .avatar-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        img {
+            border-radius: 50%;
+            width: 150px; /* Set a fixed width for the avatar */
+            height: 150px; /* Set a fixed height for the avatar */
+        }
+        label {
+            {#display: block;#}
+            margin-bottom: 5px;
+            font-weight: bold; /* 设置加粗 */
+            font-family: 'Arial', sans-serif; /* 设置字体，可以更改为其他可用的字体 */
+        }
+        p {
+            {#display: block;#}
+            margin-bottom: 5px;
+            font-weight: bold; /* 设置加粗 */
+            font-family: 'Arial', sans-serif; /* 设置字体，可以更改为其他可用的字体 */
+        }
+        input, select {
+            width: 20%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* 增加顶部间距 */
+        }
+    </style>
 
 </head>
 
 <body>
-    <h2>{{ player.name }} - Details</h2>
-    <img src="{{ url_for('static', filename='avatar/' + player['avatar']) }}" alt="头像" width="150">
-{#    <img src="{{ player.avatar }}" alt="Avatar">#}
-    <p>Position: {{ player.position }}</p>
-    <form method="POST">
-        <label for="position">Position:</label>
-        <select name="position" id="position">
-            <option value="控球后卫" {% if player.position == '控球后卫' %}selected{% endif %}>控球后卫</option>
-            <option value="得分后卫" {% if player.position == '得分后卫' %}selected{% endif %}>得分后卫</option>
-            <option value="小前锋" {% if player.position == '小前锋' %}selected{% endif %}>小前锋</option>
-            <option value="大前锋" {% if player.position == '大前锋' %}selected{% endif %}>大前锋</option>
-            <option value="中锋" {% if player.position == '中锋' %}selected{% endif %}>中锋</option>
-        </select><br>
-        <label for="pos_neg">湖力值: {{ player.skills.defense*0.2 + player.skills.offense*0.15 + player.skills.shooting*0.15 + player.skills.speed*0.1
-                + player.skills.stamina*0.15 + player.skills.charisma * 0.25 }}</label><br>
-{#        <input type="number" name="pos_neg" id="pos_neg" value="{{ player.pos_neg }}" min="-10000" max="10000"><br>#}
-        <label for="defense">防守:</label>
-        <input type="number" name="defense" id="defense" value="{{ player.skills.defense }}" min="0" max="100"><br>
-        <label for="offense">进攻:</label>
-        <input type="number" name="offense" id="offense" value="{{ player.skills.offense }}" min="0" max="100"><br>
-        <label for="shooting">投射:</label>
-        <input type="number" name="shooting" id="shooting" value="{{ player.skills.shooting }}" min="0" max="100"><br>
-        <label for="speed">速度:</label>
-        <input type="number" name="speed" id="speed" value="{{ player.skills.speed }}" min="0" max="100"><br>
-        <label for="stamina">体力:</label>
-        <input type="number" name="stamina" id="stamina" value="{{ player.skills.stamina }}" min="0" max="100"><br>
-        <label for="charisma">魅力:</label>
-        <input type="number" name="charisma" id="charisma" value="{{ player.skills.charisma }}" min="0" max="100"><br>
-        <button type="submit">Update</button>
-    </form>
-    <button onclick="location.href='{{ url_for('rcbaplayer.index') }}'">Back to list</button>
+    <div class="container">
+        <h2>{{ player.name }} - Details</h2>
+        <img src="{{ url_for('static', filename='avatar/' + player['avatar']) }}" alt="头像" width="150">
+    {#    <img src="{{ player.avatar }}" alt="Avatar">#}
+        <p>位置: {{ player.position }}</p>
+        <form method="POST">
+            <label for="position">位置:</label>
+            <select name="position" id="position">
+                <option value="控球后卫" {% if player.position == '控球后卫' %}selected{% endif %}>控球后卫</option>
+                <option value="得分后卫" {% if player.position == '得分后卫' %}selected{% endif %}>得分后卫</option>
+                <option value="小前锋" {% if player.position == '小前锋' %}selected{% endif %}>小前锋</option>
+                <option value="大前锋" {% if player.position == '大前锋' %}selected{% endif %}>大前锋</option>
+                <option value="中锋" {% if player.position == '中锋' %}selected{% endif %}>中锋</option>
+            </select><br>
+            <label for="pos_neg">湖力值: {{ player.skills.defense*0.2 + player.skills.offense*0.15 + player.skills.shooting*0.15 + player.skills.speed*0.1
+                    + player.skills.stamina*0.15 + player.skills.charisma * 0.25 }}</label><br>
+    {#        <input type="number" name="pos_neg" id="pos_neg" value="{{ player.pos_neg }}" min="-10000" max="10000"><br>#}
+            <label for="defense">防守:</label>
+            <input type="number" name="defense" id="defense" value="{{ player.skills.defense }}" min="0" max="100"><br>
+            <label for="offense">进攻:</label>
+            <input type="number" name="offense" id="offense" value="{{ player.skills.offense }}" min="0" max="100"><br>
+            <label for="shooting">投射:</label>
+            <input type="number" name="shooting" id="shooting" value="{{ player.skills.shooting }}" min="0" max="100"><br>
+            <label for="speed">速度:</label>
+            <input type="number" name="speed" id="speed" value="{{ player.skills.speed }}" min="0" max="100"><br>
+            <label for="stamina">体力:</label>
+            <input type="number" name="stamina" id="stamina" value="{{ player.skills.stamina }}" min="0" max="100"><br>
+            <label for="charisma">魅力:</label>
+            <input type="number" name="charisma" id="charisma" value="{{ player.skills.charisma }}" min="0" max="100"><br>
+            <button type="submit">更新</button>
+        </form>
+        <button onclick="location.href='{{ url_for('rcbaplayer.index') }}'">返回球星列表</button>
+    </div>
 </body>
 </html>
