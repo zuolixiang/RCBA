@@ -56,10 +56,12 @@
             text-align: center;
         }
         .comparison-container {
-            margin-top: 20px;
-            text-align: center;
+            position: absolute; /* 使用绝对定位 */
+            top: 105px; /* 距离页面顶部的距离 */
+            right: 40px; /* 距离页面右侧的距离 */
+            padding: 10px 20px;
+            border-radius: 5px;
         }
-
         .comparison-container button {
             padding: 10px 20px;
             font-size: 16px;
@@ -69,7 +71,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         .comparison-container button:hover {
             background-color: #0056b3;
         }
