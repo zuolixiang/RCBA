@@ -129,9 +129,9 @@ def login():
         role = request.form['role']  # 'admin' or 'user'
 
         # Logic for role enforcement
-        if username == 'hailiyang' and role != 'admin':
-            return "hailiyang must be an admin!", 403
-        elif username != 'hailiyang' and role == 'admin':
+        if username in ('hailiyang', '陆智卿') and role != 'admin':
+            return f" {username} must be an admin! 403"
+        elif username not in ('hailiyang', '陆智卿')  and role == 'admin':
             return "对不起，您不是管理员，请用自己姓名作为用户名，选择普通用户登录!", 403
 
 
