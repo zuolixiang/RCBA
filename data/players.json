@@ -67,11 +67,11 @@
             "position": "大前锋",
             "pos_neg": 100,
             "skills": {
-                "defense": 95,
-                "offense": 95,
-                "shooting": 100,
-                "speed": 95,
-                "stamina": 100,
+                "defense": 5,
+                "offense": 5,
+                "shooting": 6,
+                "speed": 8,
+                "stamina": 8,
                 "charisma": 100
             }
         },
@@ -187,12 +187,12 @@
             "position": "控球后卫",
             "pos_neg": 100,
             "skills": {
-                "defense": 95,
-                "offense": 95,
-                "shooting": 90,
-                "speed": 95,
-                "stamina": 85,
-                "charisma": 85
+                "defense": 0,
+                "offense": 0,
+                "shooting": 0,
+                "speed": 0,
+                "stamina": 0,
+                "charisma": 100
             }
         },
         {
@@ -262,12 +262,12 @@
             "position": "中锋",
             "pos_neg": 100,
             "skills": {
-                "defense": 60,
-                "offense": 90,
-                "shooting": 85,
-                "speed": 80,
-                "stamina": 70,
-                "charisma": 75
+                "defense": 99,
+                "offense": 99,
+                "shooting": 99,
+                "speed": 99,
+                "stamina": 99,
+                "charisma": 99
             }
         },
         {
