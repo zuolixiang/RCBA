@@ -31,20 +31,22 @@
         /* 标签样式 */
         .comparison-container label {
             font-weight: bold;
+            font-size: 16px; /* 调大标签字体大小 */
             margin-right: 10px;
         }
 
         /* 下拉框样式 */
         .comparison-container select {
-            padding: 5px 10px;
+            padding: 10px 15px; /* 调整内边距，使下拉框变大 */
             border-radius: 4px;
             border: 1px solid #ccc;
-            font-size: 14px;
+            font-size: 16px; /* 调大字体大小 */
+            width: 180px; /* 设置下拉框的宽度 */
         }
 
         /* 按钮样式 */
         .comparison-container button {
-            padding: 8px 16px;
+            padding: 10px 20px; /* 调整按钮的内边距 */
             background-color: #007bff; /* 蓝色按钮 */
             color: white;
             border: none;
@@ -53,9 +55,27 @@
             font-size: 16px;
             transition: background-color 0.3s; /* 背景颜色过渡效果 */
         }
-
         .comparison-container button:hover {
             background-color: #0056b3; /* 鼠标悬停时的颜色 */
+        }
+        .back-container {
+            position: absolute; /* 使用绝对定位 */
+            top: 140px; /* 距离页面顶部的距离 */
+            right: 40px; /* 距离页面右侧的距离 */
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .back-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .back-container button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -80,6 +100,11 @@
         <button id="compareButton">PK</button>
     </div>
 
+    {% if session.get('username') %}
+    <div class="back-container">
+        <button onclick="location.href='{{ url_for('rcbaplayer.index') }}'">返回首页</button>
+    </div>
+    {% endif %}
     <canvas id="tornadoChart" width="600" height="400"></canvas>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

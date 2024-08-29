@@ -18,7 +18,7 @@
         {
             "id": 2,
             "name": "陆智卿",
-            "avatar": "2雷吉米勒.png",
+            "avatar": "2陆智卿.png",
             "position": "得分后卫",
             "pos_neg": 100,
             "skills": {
@@ -78,7 +78,7 @@
         {
             "id": 6,
             "name": "赵康伉",
-            "avatar": "6杜兰特.png",
+            "avatar": "6赵康伉.png",
             "position": "小前锋",
             "pos_neg": 100,
             "skills": {
@@ -333,7 +333,7 @@
         {
             "id": 23,
             "name": "冉孟鑫",
-            "avatar": "23高砂一马.png",
+            "avatar": "23冉孟鑫.png",
             "position": "中锋",
             "pos_neg": 100,
             "skills": {
@@ -348,7 +348,7 @@
         {
             "id": 24,
             "name": "冯睿敏",
-            "avatar": "24汤普森.png",
+            "avatar": "24冯睿敏.png",
             "position": "得分后卫",
             "pos_neg": 100,
             "skills": {
