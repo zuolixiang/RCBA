@@ -4,10 +4,20 @@
     <meta charset="UTF-8">
     <title>球星对比</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
     <style>
-        .comparison-container {
-            text-align: center;
-            margin-bottom: 20px;
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute; /* 使用绝对定位 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 85px;
+            box-sizing: border-box;
+            background-color: #007bff; /* 导航栏背景颜色 */
+            padding: 10px 20px;
         }
         #tornadoChart {
             max-width: 800px;  /* 限制图表最大宽度 */
@@ -16,8 +26,9 @@
         }
         /* 美化比较容器 */
         .comparison-container {
+            top: 20px;
             text-align: center;
-            margin: 20px 0;
+            {#margin: 20px 0;#}
             padding: 20px;
             background-color: #f0f0f0; /* 灰色背景 */
             border-radius: 8px; /* 圆角 */
@@ -60,7 +71,7 @@
         }
         .back-container {
             position: absolute; /* 使用绝对定位 */
-            top: 140px; /* 距离页面顶部的距离 */
+            top: 115px; /* 距离页面顶部的距离 */
             right: 40px; /* 距离页面右侧的距离 */
             padding: 10px 20px;
             border-radius: 5px;
@@ -79,8 +90,11 @@
         }
     </style>
 </head>
+
 <body>
-    <h2>球星对比</h2>
+    <div class="navbar">
+        <h1 class="navbar-title">球星对比</h1>
+    </div>
 
     <div class="comparison-container">
         <label for="player1">选择球星1:</label>
@@ -102,7 +116,7 @@
 
     {% if session.get('username') %}
     <div class="back-container">
-        <button onclick="location.href='{{ url_for('rcbaplayer.index') }}'">返回首页</button>
+        <button onclick="location.href='{{ url_for('rcbaplayer.player') }}'">返回球员页</button>
     </div>
     {% endif %}
     <canvas id="tornadoChart" width="600" height="400"></canvas>

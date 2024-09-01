@@ -1,0 +1,146 @@
+body, div, h1 {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+body {
+    padding-top: 135px;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: calc(85px + 20px) 20px 0 20px;
+}
+/* 顶部导航栏样式 */
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    padding: 10px 20px;
+    color: white;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 85px;
+    position: absolute; /* 使用绝对定位 */
+    box-sizing: border-box;
+}
+.navbar .logo {
+    display: flex;
+    align-items: center;
+}
+.navbar .logo {
+    height: 60px; /* 设置 logo 的高度 */
+    width: auto;  /* 宽度自动调整，保持比例 */
+    margin-right: 10px; /* 给 logo 和导航按钮之间增加一些空间 */
+}
+.navbar .logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.navbar .logo span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar .nav-links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.navbar .nav-links li {
+    margin: 5px 20px;
+}
+
+.navbar .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+.navbar .nav-links a:hover {
+    text-decoration: underline;
+}
+.navbar-right {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+
+}
+.navbar-right span {
+    color: white;
+    margin-right: 10px;
+}
+.navbar-right button {
+    color: white;
+    background-color: #555;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.navbar-right button:hover {
+    background-color: #777;
+}
+
+.navbar a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    position: relative;
+}
+
+.navbar a.active {
+    color: white; /* 激活按钮的文本颜色 */
+    border-bottom: 2px solid white; /* 添加下划线 */
+    background-color: #007bff; /* 可选：改变背景色，突出显示 */
+}
+
+/* 轮播图样式 */
+.carousel {
+    width: 60%;  /* 设置轮播图的宽度为页面宽度的 80% */
+    max-height: 660px;
+    margin: 30px auto 0; /* 使轮播图居中 */
+    position: relative;
+}
+.carousel .slick-track {
+    height: calc(100vh - 117px - 30px * 2 - 20px);
+    overflow: hidden;
+}
+.slick-slide {
+    display: block;
+    height: auto;
+}
+
+.carousel img {
+    width: 80%;
+    height: auto; /* 保持图片的宽高比 */
+}
+
+.slick-prev, .slick-next {
+    font-size: 24px;
+    line-height: 1;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff;
+}
+
+.slick-prev:hover, .slick-next:hover {
+    opacity: 1;
+}
+
+.slick-prev {
+    left: 10px;
+}
+
+.slick-next {
+    right: 10px;
+}

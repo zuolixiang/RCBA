@@ -28,8 +28,8 @@ def save_players(players):
 
 players = load_players()
 
-@rcbaplayer.route('/')
-def index():
+@rcbaplayer.route('/player')
+def player():
     # if 'username' not in session:
     #     return redirect(url_for('rcbaplayer.login'))
     page = request.args.get('page', 1, type=int)
@@ -43,8 +43,14 @@ def index():
         "page": page,
     }
 
-    # return render_template('index.html', players=paginated_players, page=page, per_page=per_page, total_players=total_players)
-    return render_template('index.html', **context)
+    # return render_template('players.html', players=paginated_players, page=page, per_page=per_page, total_players=total_players)
+    return render_template('players.html', **context)
+
+
+@rcbaplayer.route('/')
+def index():
+    return render_template('index.html')
+
 
 # Player details and update route
 @rcbaplayer.route('/player/<int:player_id>', methods=['GET', 'POST'])

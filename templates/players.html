@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basketball Players</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+    <style>
+        .position {
+            margin-bottom: 12px;
+        }
+        .metric {
+            margin-top: 12px;
+        }
+        .pagination {
+            margin-top: 30px;  /* 增加顶部的空隙 */
+            margin-bottom: 30px; /* 增加底部的空隙 */
+            padding: 10px 0;  /* 增加上下的内边距 */
+            text-align: center;
+        }
+        .comparison-container {
+            position: absolute; /* 使用绝对定位 */
+            top: calc(55px + 40px); /* 距离页面顶部的距离 */
+            right: 40px; /* 距离页面右侧的距离 */
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .comparison-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .comparison-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="../static/logo/logo.png" alt="RCBA Logo">
+            <span>RCBA</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('rcbaplayer.index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}" >首页</a></li>
+            <li><a href="#" class="{% if request.endpoint == 'team' %}active{% endif %}" >球队</a></li>
+            <li><a href="{{ url_for('rcbaplayer.player') }}" class="{% if request.endpoint == 'player' %}active{% endif %}">球员</a></li>
+            <li><a href="#" class="{% if request.endpoint == 'data' %}active{% endif %}" >数据</a></li>
+            <li><a href="#" class="{% if request.endpoint == 'scehdual' %}active{% endif %}">赛程</a></li>
+        </ul>
+    </div>
+
+    {# 球星对比入口   #}
+    {% if session.get('username') %}
+    <div class="comparison-container">
+        <button onclick="location.href='{{ url_for('rcbaplayer.compare_players') }}'">球星对比</button>
+    </div>
+    {% endif %}
+
+    <div class="player-container">
+        {% for player in players %}
+        <div class="player-card">
+            <img src="{{ url_for('static', filename='avatar/' + player['avatar']) }}" alt="头像" width="150">
+            <h3>{{ player.name }}</h3>
+            <p class="position">Position: {{ player.position }}</p>
+            <p class="metric">湖力值: {{ player.skills.defense*0.2 + player.skills.offense*0.15 + player.skills.shooting*0.15 + player.skills.speed*0.1
+                + player.skills.stamina*0.15 + player.skills.charisma * 0.25 }} </p>
+            <canvas id="radarChart{{ player.id }}" width="200" height="200"></canvas>
+            <button onclick="location.href='{{ url_for('rcbaplayer.player_show', player_id=player.id) }}'">View Details</button>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const players = {{ players | tojson }};
+        players.forEach(player => {
+            const ctx = document.getElementById('radarChart' + player.id).getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['防守', '进攻', '投射', '速度', '体力', '魅力'],
+                    datasets: [{
+                        label: player.name,
+                        data: [
+                            player.skills.defense,
+                            player.skills.offense,
+                            player.skills.shooting,
+                            player.skills.speed,
+                            player.skills.stamina,
+                            player.skills.charisma
+                        ],
+                        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                        borderColor: 'rgba(0, 123, 255, 1)',
+                        pointBackgroundColor: 'rgba(0, 123, 255, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <div class="pagination">
+        {% if page > 1 %}
+            <a href="{{ url_for('rcbaplayer.player',  page=page-1 ) }}">上一页</a>
+        {% endif %}
+        {% if page * per_page < total_players %}
+            <a href="{{ url_for('rcbaplayer.player', page=page+1 ) }}">下一页</a>
+        {% endif %}
+    </div>
+</body>
+</html>
