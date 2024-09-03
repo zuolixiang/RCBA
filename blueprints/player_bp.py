@@ -32,6 +32,13 @@ teams_json = current_file_path + '/../data/teams.json'
 players = load_json_data(players_json, 'players')
 teams = load_json_data(teams_json, 'teams')
 
+
+# 首页
+@rcbaplayer.route('/')
+def index():
+    return render_template('index.html')
+
+
 # 球队页
 @rcbaplayer.route('/team')
 def team():
@@ -71,11 +78,6 @@ def player():
 
     # return render_template('players.html', players=paginated_players, page=page, per_page=per_page, total_players=total_players)
     return render_template('players.html', **context)
-
-# 首页
-@rcbaplayer.route('/')
-def index():
-    return render_template('index.html')
 
 
 # 球星detail页
