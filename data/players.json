@@ -5,7 +5,7 @@
             "name": "潘栋恒",
             "avatar": "1乔丹.png",
             "position": "得分后卫",
-            "team": "精算",
+            "team_name": "精算",
             "pos_neg": "10000",
             "skills": {
                 "defense": 100,
@@ -21,7 +21,7 @@
             "name": "陆智卿",
             "avatar": "2陆智卿.png",
             "position": "得分后卫",
-            "team": "数据",
+            "team_name": "数据",
             "pos_neg": 100,
             "skills": {
                 "defense": 90,
@@ -37,7 +37,7 @@
             "name": "申时行",
             "avatar": "3藤真健司.png",
             "position": "控球后卫",
-            "team": "多元",
+            "team_name": "多元",
             "pos_neg": 100,
             "skills": {
                 "defense": 90,
@@ -53,7 +53,7 @@
             "name": "蓝启嵩",
             "avatar": "4樱木花道.png",
             "position": "小前锋",
-            "team": "新技术",
+            "team_name": "新技术",
             "pos_neg": 100,
             "skills": {
                 "defense": 85,
@@ -69,7 +69,7 @@
             "name": "王明斌",
             "avatar": "5詹姆斯.png",
             "position": "大前锋",
-            "team": "精算",
+            "team_name": "精算",
             "pos_neg": 100,
             "skills": {
                 "defense": 5,
@@ -85,7 +85,7 @@
             "name": "赵康伉",
             "avatar": "6赵康伉.png",
             "position": "小前锋",
-            "team": "核心",
+            "team_name": "核心",
             "pos_neg": 100,
             "skills": {
                 "defense": 99,
@@ -101,7 +101,7 @@
             "name": "隗功晖",
             "avatar": "7约翰逊.png",
             "position": "控球后卫",
-            "team": "客服",
+            "team_name": "客服",
             "pos_neg": 100,
             "skills": {
                 "defense": 95,
@@ -117,7 +117,7 @@
             "name": "曲明钰",
             "avatar": "8伦纳德.png",
             "position": "小前锋",
-            "team": "数据",
+            "team_name": "数据",
             "pos_neg": 100,
             "skills": {
                 "defense": 95,
@@ -133,7 +133,7 @@
             "name": "王光纯",
             "avatar": "9宫城良田.png",
             "position": "控球后卫",
-            "team": "核心",
+            "team_name": "核心",
             "pos_neg": 100,
             "skills": {
                 "defense": 85,
@@ -149,7 +149,7 @@
             "name": "高明",
             "avatar": "10塔图姆.png",
             "position": "小前锋",
-            "team": "精算",
+            "team_name": "精算",
             "pos_neg": 100,
             "skills": {
                 "defense": 85,
@@ -165,7 +165,7 @@
             "name": "屈骏夫",
             "avatar": "11花形透.png",
             "position": "中锋",
-            "team": "数据",
+            "team_name": "数据",
             "pos_neg": 100,
             "skills": {
                 "defense": 88,
@@ -181,7 +181,7 @@
             "name": "赵永会",
             "avatar": "12库里.png",
             "position": "得分后卫",
-            "team": "经管",
+            "team_name": "经管",
             "pos_neg": 100,
             "skills": {
                 "defense": 95,
@@ -197,7 +197,7 @@
             "name": "李奇",
             "avatar": "13帕克.png",
             "position": "控球后卫",
-            "team": "客服",
+            "team_name": "客服",
             "pos_neg": 100,
             "skills": {
                 "defense": 0,
@@ -213,7 +213,7 @@
             "name": "翟赫然",
             "avatar": "14保罗乔治.png",
             "position": "小前锋",
-            "team": "客服",
+            "team_name": "客服",
             "pos_neg": 100,
             "skills": {
                 "defense": 85,
@@ -229,7 +229,7 @@
             "name": "庞义卓",
             "avatar": "15阿神.png",
             "position": "中锋",
-            "team": "核心",
+            "team_name": "核心",
             "pos_neg": 100,
             "skills": {
                 "defense": 90,
@@ -245,7 +245,7 @@
             "name": "杨海力",
             "avatar": "16樱木.png",
             "position": "得分后卫",
-            "team": "经管",
+            "team_name": "经管",
             "pos_neg": 100,
             "skills": {
                 "defense": 90,
@@ -261,7 +261,7 @@
             "name": "赵宏阳",
             "avatar": "17加索尔.png",
             "position": "大前锋",
-            "team": "精算",
+            "team_name": "精算",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -277,7 +277,7 @@
             "name": "赵建凯",
             "avatar": "18诺维茨基.png",
             "position": "中锋",
-            "team": "多元",
+            "team_name": "多元",
             "pos_neg": 100,
             "skills": {
                 "defense": 99,
@@ -293,7 +293,7 @@
             "name": "王南",
             "avatar": "19巴克利.png",
             "position": "大前锋",
-            "team": "多元",
+            "team_name": "多元",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -309,7 +309,7 @@
             "name": "邹越",
             "avatar": "20瓦格纳.png",
             "position": "小前锋",
-            "team": "行政",
+            "team_name": "行政",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -325,7 +325,7 @@
             "name": "王文芳",
             "avatar": "21吉诺比利.png",
             "position": "得分后卫",
-            "team": "核心",
+            "team_name": "核心",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -341,7 +341,7 @@
             "name": "李光",
             "avatar": "22哈登.png",
             "position": "得分后卫",
-            "team": "客服",
+            "team_name": "客服",
             "pos_neg": 100,
             "skills": {
                 "defense": 99,
@@ -357,7 +357,7 @@
             "name": "冉孟鑫",
             "avatar": "23冉孟鑫.png",
             "position": "中锋",
-            "team": "客服",
+            "team_name": "客服",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -373,7 +373,7 @@
             "name": "冯睿敏",
             "avatar": "24冯睿敏.png",
             "position": "得分后卫",
-            "team": "数据",
+            "team_name": "数据",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -389,7 +389,7 @@
             "name": "徐林",
             "avatar": "25雷阿伦.png",
             "position": "得分后卫",
-            "team": "数据",
+            "team_name": "数据",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -405,7 +405,7 @@
             "name": "李平",
             "avatar": "26特雷杨.png",
             "position": "得分后卫",
-            "team": "数据",
+            "team_name": "数据",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -421,7 +421,7 @@
             "name": "孙健",
             "avatar": "27德罗赞.png",
             "position": "得分后卫",
-            "team": "项管",
+            "team_name": "项管",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -437,7 +437,7 @@
             "name": "王慧龙",
             "avatar": "28字母哥.png",
             "position": "小前锋",
-            "team": "新技术",
+            "team_name": "新技术",
             "pos_neg": 100,
             "skills": {
                 "defense": 80,
@@ -453,7 +453,7 @@
             "name": "费远",
             "avatar": "29保罗.png",
             "position": "控球后卫",
-            "team": "新技术",
+            "team_name": "新技术",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -469,7 +469,7 @@
             "name": "宋欣航",
             "avatar": "30南烈.png",
             "position": "控球后卫",
-            "team": "新技术",
+            "team_name": "新技术",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -485,7 +485,7 @@
             "name": "薛展",
             "avatar": "31仙道彰.png",
             "position": "小前锋",
-            "team": "精算",
+            "team_name": "精算",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -501,7 +501,7 @@
             "name": "陶曦",
             "avatar": "32考辛斯.png",
             "position": "中锋",
-            "team": "经管",
+            "team_name": "经管",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,
@@ -517,7 +517,7 @@
             "name": "程诚",
             "avatar": "33鱼柱纯.png",
             "position": "中锋",
-            "team": "核心",
+            "team_name": "核心",
             "pos_neg": 100,
             "skills": {
                 "defense": 60,

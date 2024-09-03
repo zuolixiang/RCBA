@@ -17,17 +17,43 @@ rcbaplayer = Blueprint('rcbaplayer', __name__, template_folder='templates')
 
 current_file_path = os.path.dirname(os.path.abspath(__file__))
 # 读取球员数据
-def load_players():
-    with open(current_file_path + '/../data/players.json', 'r') as file:
-        return json.load(file)['players']
+def load_json_data(filename, key):
+    with open(filename, 'r') as file:
+        return json.load(file)[key]
 
 # 保存球员数据
 def save_players(players):
     with open(current_file_path + '/../data/players.json', 'w', encoding='utf8') as file:
         json.dump({"players": players}, file, indent=4, ensure_ascii=False)
 
-players = load_players()
+players_json = current_file_path + '/../data/players.json'
+teams_json = current_file_path + '/../data/teams.json'
 
+players = load_json_data(players_json, 'players')
+teams = load_json_data(teams_json, 'teams')
+
+# 球队页
+@rcbaplayer.route('/team')
+def team():
+    for team in teams:
+        team_players = [player for player in players if player['team_name'] == team['team_name']]
+        team['player_count'] = len(team_players)
+    return render_template('teams.html', teams=teams)
+
+
+@rcbaplayer.route('/team/<team_name>')
+def team_detail(team_name):
+    # 过滤出该球队的球员
+    team_players = [player for player in players if player['team_name'] == team_name]
+    contont = {
+        "team_name": team_name,
+        "players": team_players,
+        "team_count": len(team_players)
+    }
+    return render_template('team_detail.html', **contont)
+
+
+# 球星页
 @rcbaplayer.route('/player')
 def player():
     # if 'username' not in session:
@@ -46,13 +72,13 @@ def player():
     # return render_template('players.html', players=paginated_players, page=page, per_page=per_page, total_players=total_players)
     return render_template('players.html', **context)
 
-
+# 首页
 @rcbaplayer.route('/')
 def index():
     return render_template('index.html')
 
 
-# Player details and update route
+# 球星detail页
 @rcbaplayer.route('/player/<int:player_id>', methods=['GET', 'POST'])
 def player_show(player_id):
     player = next((p for p in players if p['id'] == player_id), None)
@@ -96,6 +122,7 @@ def player_show(player_id):
     return render_template('playershow.html', player=player)
 
 
+# 球星对比页
 @rcbaplayer.route('/compare')
 def compare_players():
     if 'username' not in session:
@@ -126,7 +153,7 @@ def get_comparison_data(player1_id, player2_id):
         return jsonify({'error': 'Player not found'}), 404
 
 
-
+# 登录页
 @rcbaplayer.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':

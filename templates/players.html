@@ -47,7 +47,7 @@
         </div>
         <ul class="nav-links">
             <li><a href="{{ url_for('rcbaplayer.index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}" >首页</a></li>
-            <li><a href="#" class="{% if request.endpoint == 'team' %}active{% endif %}" >球队</a></li>
+            <li><a href="{{ url_for('rcbaplayer.team') }}" class="{% if request.endpoint == 'team' %}active{% endif %}" >球队</a></li>
             <li><a href="{{ url_for('rcbaplayer.player') }}" class="{% if request.endpoint == 'player' %}active{% endif %}">球员</a></li>
             <li><a href="#" class="{% if request.endpoint == 'data' %}active{% endif %}" >数据</a></li>
             <li><a href="#" class="{% if request.endpoint == 'scehdual' %}active{% endif %}">赛程</a></li>

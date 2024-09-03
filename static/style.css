@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Oswald', sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
@@ -76,4 +76,67 @@ h2 {
     margin: 0 10px;
     padding: 10px;
     font-size: 16px;
+}
+
+
+.team-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* 设置卡片之间的间距 */
+    justify-content: center; /* 让卡片居中显示 */
+}
+
+.team-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 23%; /* 每行四个卡片，宽度设置为 23% 可以有一些间距 */
+    margin-bottom: 20px;
+    padding: 15px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    display: flex;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.team-logo img {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+}
+
+
+/* 定义team-info样式 */
+.team-info {
+    margin-left: 20px;
+    text-align: center;
+}
+
+/* 定义team-details样式 */
+.team-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.team-info h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+/* 定义team-links样式 */
+.team-links {
+    margin-top: 10px;
+}
+
+/* 定义team-links内a元素的样式 */
+.team-links a {
+    margin: 0 5px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
 }

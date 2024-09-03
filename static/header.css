@@ -7,7 +7,7 @@ body {
     padding-top: 135px;
 }
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Oswald', sans-serif;
     background-color: #f4f4f4;
     color: #333;
     padding: calc(85px + 20px) 20px 0 20px;
@@ -26,17 +26,26 @@ body {
     position: absolute; /* 使用绝对定位 */
     box-sizing: border-box;
 }
+.navbar-title {
+    font-family: 'Oswald', sans-serif; /* 使用瘦长型字体 */
+    font-size: 34px; /* 根据需要调整字体大小 */
+    font-weight: 400; /* 调整字体粗细 */
+    letter-spacing: 1px; /* 增加字母之间的间距，增强瘦长效果 */
+    color: white; /* 设置字体颜色 */
+    margin-left: 10px; /* 左边距 */
+}
+
 .navbar .logo {
     display: flex;
     align-items: center;
 }
 .navbar .logo {
-    height: 60px; /* 设置 logo 的高度 */
+    height: 80px; /* 设置 logo 的高度 */
     width: auto;  /* 宽度自动调整，保持比例 */
     margin-right: 10px; /* 给 logo 和导航按钮之间增加一些空间 */
 }
 .navbar .logo img {
-    height: 40px;
+    height: 60px;
     margin-right: 10px;
 }
 

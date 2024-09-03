@@ -1,0 +1,46 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>球队页面</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="../static/logo/logo.png" alt="RCBA Logo">
+            <span>RCBA</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('rcbaplayer.index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}" >首页</a></li>
+            <li><a href="#" class="{% if request.endpoint == 'team' %}active{% endif %}" >球队</a></li>
+            <li><a href="{{ url_for('rcbaplayer.player') }}" class="{% if request.endpoint == 'player' %}active{% endif %}">球员</a></li>
+            <li><a href="#" class="{% if request.endpoint == 'data' %}active{% endif %}" >数据</a></li>
+            <li><a href="#" class="{% if request.endpoint == 'scehdual' %}active{% endif %}">赛程</a></li>
+        </ul>
+    </div>
+
+    <div class="team-container">
+        {% for team in teams %}
+        <div class="team-card">
+            <div class="team-logo">
+                <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="{{ team.team_name }} Logo">
+            </div>
+            <div class="team-info">
+                <h3>{{ team.team_name }}</h3>
+                <p>球员人数: {{ team.player_count }}</p>
+                <div class="team-links">
+                    <a href="{{ url_for('rcbaplayer.team_detail', team_name=team['team_name']) }}">阵容</a>
+                    <a href="#">视频</a>
+                    <a href="#">视频</a>
+                    <a href="#">视频</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

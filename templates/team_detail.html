@@ -1,0 +1,99 @@
+<!-- team_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ team_name }} - 阵容</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table.team-roster {
+            width: 100%;
+            border-collapse: collapse; /* 合并边框 */
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table.team-roster th, table.team-roster td {
+            border: 1px solid #ddd; /* 添加边框 */
+            padding: 10px;
+            text-align: center;
+        }
+
+        table.team-roster th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        .player-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%; /* 使头像为圆形 */
+        }
+
+        table.team-roster tr:nth-child(even) {
+            background-color: #f9f9f9; /* 隔行变色 */
+        }
+
+        .player-info span {
+            font-size: 14px;
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* 增加顶部间距 */
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>{{ team_name }} 阵容</h2>
+    <table class="team-roster">
+        <thead>
+            <tr>
+                <th>头像</th>
+                <th>姓名</th>
+                <th>身高</th>
+                <th>体重</th>
+                <th>位置</th>
+                <th>球龄</th>
+                <th>球号</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in players %}
+            <tr>
+                <td><img src="{{ url_for('static', filename='avatar/' + player['avatar']) }}" alt="{{ player.name }} 头像" class="player-avatar"></td>
+                <td>{{ player.name }}</td>
+                <td> 180 cm</td>
+                <td> 80 kg</td>
+                <td>{{ player.position }}</td>
+                <td> 6 年</td>
+                <td> 5 号</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button onclick="location.href='{{ url_for('rcbaplayer.team') }}'">返回球队页</button>
+</body>
+</html>
