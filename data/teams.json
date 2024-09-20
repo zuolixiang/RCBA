@@ -1,0 +1,109 @@
+{
+    "teams": [
+        {
+            "id": 1,
+            "team_name": "核心",
+            "logo": "1乔丹.png",
+            "player_count": 6
+        },
+        {
+            "id": 2,
+            "team_name": "客服",
+            "logo": "1乔丹.png",
+            "player_count": 6
+        },
+        {
+            "id": 3,
+            "team_name": "多元",
+            "logo": "1乔丹.png",
+            "player_count": 6
+        },
+        {
+            "id": 4,
+            "team_name": "数据",
+            "logo": "1乔丹.png",
+            "player_count": 6
+        },
+        {
+            "id": 5,
+            "team_name": "新技术",
+            "logo": "1乔丹.png",
+            "player_count": 6
+        },
+        {
+            "id": 6,
+            "team_name": "经管",
+            "logo": "1乔丹.png",
+            "player_count": 4
+        },
+        {
+            "id": 7,
+            "team_name": "精算",
+            "logo": "1乔丹.png",
+            "player_count": 6
+        },
+        {
+            "id": 8,
+            "team_name": "行政",
+            "logo": "1乔丹.png",
+            "player_count": 1
+        },
+        {
+            "id": 9,
+            "team_name": "项管",
+            "logo": "1乔丹.png",
+            "player_count": 1
+        },
+        {
+            "id": 10,
+            "team_name": "质量",
+            "logo": "1乔丹.png",
+            "player_count": 1
+        },
+        {
+            "id": 11,
+            "team_name": "部署",
+            "logo": "1乔丹.png",
+            "player_count": 1
+        }
+
+    ],
+    "comp_teams_2024": [
+        {
+            "id": 1,
+            "captain": "申时行",
+            "comp_team": "稻香",
+            "captain_avatar": "3藤真健司.png"
+        },
+        {
+            "id": 2,
+            "captain": "庞义卓",
+            "comp_team": "悟空",
+            "captain_avatar": "11花形透.png"
+        },
+        {
+            "id": 3,
+            "captain": "赵康伉",
+            "comp_team": "闪电",
+            "captain_avatar": "6赵康伉.png"
+        },
+        {
+            "id": 4,
+            "captain": "冉孟鑫",
+            "comp_team": "疾风",
+            "captain_avatar": "23冉孟鑫.png"
+        },
+        {
+            "id": 5,
+            "captain": "隗功晖",
+            "comp_team": "沓星",
+            "captain_avatar": "7约翰逊.png"
+        },
+        {
+            "id": 6,
+            "captain": "王明斌",
+            "comp_team": "硬朗",
+            "captain_avatar": "5詹姆斯.png"
+        }
+    ]
+}
