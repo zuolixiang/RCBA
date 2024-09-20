@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RCBA - 首页</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+    <title>{{ year }} 年赛程</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .schedule-container {
+            width: 80%;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            table-layout: fixed; /* 固定表格布局，确保列宽度一致 */
+        }
+
+        th, td {
+            border: 1px solid #007bff;
+            padding: 10px;
+            text-align: center;
+            width: 50%;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+        /* 合并单元格的样式 */
+        .merged {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+
+        /* 期待更精彩的样式 */
+        .coming-soon {
+            font-size: 64px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航栏 -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="../static/logo/logo.png" alt="RCBA Logo">
+            <span>RCBA</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('rcbaplayer.index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}" >首页</a></li>
+            <li><a href="{{ url_for('rcbaplayer.team') }}" class="{% if request.endpoint == 'team' %}active{% endif %}" >球队</a></li>
+            <li><a href="{{ url_for('rcbaplayer.player') }}" class="{% if request.endpoint == 'player' %}active{% endif %}">球员</a></li>
+            <li><a href="#" class="{% if request.endpoint == 'data' %}active{% endif %}" >数据</a></li>
+            <li>
+                <a href="#">赛程</a>
+                <!-- 下拉菜单 -->
+                <div class="dropdown">
+                    <a href="{{ url_for('rcbaplayer.schedule', year=2024) }}">2024</a>
+                    <a href="{{ url_for('rcbaplayer.schedule', year=2025) }}">2025</a>
+                </div>
+            </li>
+{#            <li><a href="#" class="{% if request.endpoint == 'scehdual' %}active{% endif %}">赛程</a></li>#}
+        </ul>
+    </div>
+
+    <div class="schedule-container">
+        {% if year == 2024 %}
+        <table>
+            <!-- 表头 -->
+            <tr>
+                <th>日期</th>
+                <th>对阵</th>
+            </tr>
+            <!-- 第一行，合并两列 -->
+            <tr>
+                <td colspan="2" class="merged">组内循环阶段</td>
+            </tr>
+            <!-- 中间的比赛日程 -->
+            {% set date1 = [10, 12, 16, 18, 23, 25] %}
+            {% set matches1 = ['队伍A1 vs 队伍A2', '队伍B1 vs 队伍B2', '队伍A1 vs 队伍A3', '队伍B1 vs 队伍B3', '队伍A2 vs 队伍A3', '队伍B2 vs 队伍B3'] %}
+
+            {% for i in range(date1|length) %}
+            <tr>
+                <td>2024-10-{{ date1[i] }}</td>
+                <td>{{ matches1[i] }}</td>
+            </tr>
+            {% endfor %}
+            <!-- 第七行，合并两列 -->
+            <tr>
+                <td colspan="2" class="merged">淘汰赛阶段</td>
+            </tr>
+            <!-- 剩余比赛日程 -->
+            {% set date2 = ['10-30', '11-1', '11-6', '11-8'] %}
+            {% set matches2 = ['A组第一 vs B组第二', 'A组第二 vs B组第一', '季军赛', '冠军赛'] %}
+            {% for i in range(date2|length)  %}
+            <tr>
+                <td>2024-{{ date2[i] }}</td>
+                <td>{{ matches2[i] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        {% elif year == 2025 %}
+        <div class="coming-soon">
+            期待更精彩！
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ team.name }} - 球队详情</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='comp_team_detail.css') }}">
+</head>
+
+<style>
+    /* 导航栏样式 */
+    .navbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 85px;
+        background-color: #007bff;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        z-index: 10; /* 确保导航栏在顶部 */
+    }
+
+    .navbar-title {
+        color: white;
+        font-size: 24px;
+    }
+
+    /* 页面内容避免与导航栏重叠 */
+    body {
+        margin-top: 100px; /* 避免内容被导航栏覆盖 */
+    }
+
+    /* 队长部分 */
+    .captain {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .captain img {
+        width: 150px;
+        height: auto;
+        border-radius: 50%;
+    }
+
+    /* 队员部分 */
+    .team-members {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 150px;
+    }
+
+    .player {
+        text-align: center;
+        box-sizing: border-box;
+        {#margin: 20px 0;#}
+        width: 20%; /* 每行最多四个 */
+    }
+
+    .player img {
+        width: 100px;
+        height: auto;
+        border-radius: 50%;
+    }
+</style>
+
+<body>
+    <div class="navbar">
+        <h1 class="navbar-title">{{ team.comp_team }} - 球队详情</h1>
+    </div>
+
+    <!-- 队长部分 -->
+    <div class="captain">
+        <img src="{{ url_for('static', filename='avatar/' + team.captain_avatar) }}" alt="{{ team.captain }}">
+        <h2>队长: {{ team.captain }}</h2>
+    </div>
+
+    <!-- 队员部分 -->
+    <div class="team-members">
+        {% for player in players %}
+            {% if player.name != team.captain %}
+                <div class="player">
+                    <img src="{{ url_for('static', filename='avatar/' + player.avatar) }}" alt="{{ player.name }}">
+                    <p>{{ player.position }}: {{ player.name }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</body>
+</html>

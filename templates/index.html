@@ -21,7 +21,15 @@
             <li><a href="{{ url_for('rcbaplayer.team') }}" class="{% if request.endpoint == 'team' %}active{% endif %}" >球队</a></li>
             <li><a href="{{ url_for('rcbaplayer.player') }}" class="{% if request.endpoint == 'player' %}active{% endif %}">球员</a></li>
             <li><a href="#" class="{% if request.endpoint == 'data' %}active{% endif %}" >数据</a></li>
-            <li><a href="#" class="{% if request.endpoint == 'scehdual' %}active{% endif %}">赛程</a></li>
+            <li>
+                <a href="#">赛程</a>
+                <!-- 下拉菜单 -->
+                <div class="dropdown">
+                    <a href="{{ url_for('rcbaplayer.schedule', year=2024) }}">2024</a>
+                    <a href="{{ url_for('rcbaplayer.schedule', year=2025) }}">2025</a>
+                </div>
+            </li>
+{#            <li><a href="#" class="{% if request.endpoint == 'scehdual' %}active{% endif %}">赛程</a></li>#}
         </ul>
         <div class="navbar-right">
             {% if session.get('username') %}
@@ -33,14 +41,19 @@
         </div>
     </div>
 
+    <!-- 比赛宣传语 -->
+    <div class="promo-banner">
+        <h1 >金秋十月，群星荟萃，最美研发人冠军花落谁家？</h1>
+    </div>
+
     <!-- 轮播图 -->
     <div class="carousel">
-        <img src="../static/carousel/img1.png" alt="陆智卿">
-        <img src="../static/carousel/img2.png" alt="冯睿敏">
-        <img src="../static/carousel/img3.png" alt="申时行">
-        <img src="../static/carousel/img4.png" alt="赵康伉">
-        <img src="../static/carousel/img5.png" alt="王明斌">
-        <img src="../static/carousel/img6.png" alt="王光纯">
+        <a href="{{ url_for('rcbaplayer.comp_team_detail', captain='陆智卿') }}"><img src="../static/carousel/img1.png" alt="陆智卿">
+        <a href="{{ url_for('rcbaplayer.comp_team_detail', captain='冯睿敏') }}"><img src="../static/carousel/img2.png" alt="冯睿敏">
+        <a href="{{ url_for('rcbaplayer.comp_team_detail', captain='申时行') }}"><img src="../static/carousel/img3.png" alt="申时行">
+        <a href="{{ url_for('rcbaplayer.comp_team_detail', captain='赵康伉') }}"><img src="../static/carousel/img4.png" alt="赵康伉">
+        <a href="{{ url_for('rcbaplayer.comp_team_detail', captain='王明斌') }}"><img src="../static/carousel/img5.png" alt="王明斌">
+        <a href="{{ url_for('rcbaplayer.comp_team_detail', captain='王光纯') }}"><img src="../static/carousel/img6.png" alt="王光纯">
     </div>
 
     <!-- 引入必要的 JavaScript 库 -->

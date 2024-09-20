@@ -9,7 +9,14 @@
             <li><a href="{{ url_for('rcbaplayer.team') }}" class="{% if request.endpoint == 'team' %}active{% endif %}" >球队</a></li>
             <li><a href="{{ url_for('rcbaplayer.player') }}" class="{% if request.endpoint == 'player' %}active{% endif %}">球员</a></li>
             <li><a href="#" class="{% if request.endpoint == 'data' %}active{% endif %}" >数据</a></li>
-            <li><a href="#" class="{% if request.endpoint == 'scehdual' %}active{% endif %}">赛程</a></li>
+            <li>
+                <a href="#">赛程</a>
+                <!-- 下拉菜单 -->
+                <div class="dropdown">
+                    <a href="{{ url_for('rcbaplayer.schedule', year=2024) }}">2024</a>
+                    <a href="{{ url_for('rcbaplayer.schedule', year=2025) }}">2025</a>
+                </div>
+            </li>
         </ul>
     </div>
 </body>

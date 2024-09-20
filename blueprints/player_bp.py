@@ -31,12 +31,27 @@ teams_json = current_file_path + '/../data/teams.json'
 
 players = load_json_data(players_json, 'players')
 teams = load_json_data(teams_json, 'teams')
-
+comp_teams_2024 = load_json_data(teams_json, 'comp_teams_2024')
 
 # 首页
 @rcbaplayer.route('/')
 def index():
     return render_template('index.html')
+
+
+@rcbaplayer.route('/schedule/<int:year>')
+def schedule(year):
+    # 处理该年份赛程的逻辑
+    return render_template('schedule.html', year=year)
+
+
+@rcbaplayer.route('/comp_team/<captain>')
+def comp_team_detail(captain):
+    # 根据队长名获取球队信息
+    team = next((team for team in comp_teams_2024 if team['captain'] == captain), None)
+    team_players = [player for player in players if player['comp_team'] == team['comp_team']]
+
+    return render_template('comp_team_detail.html', team=team, players=team_players)
 
 
 # 球队页

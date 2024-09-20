@@ -1,0 +1,29 @@
+/* 队长部分样式 */
+.captain {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.captain img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+
+/* 队员部分样式 */
+.team-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.player {
+    text-align: center;
+    margin: 20px;
+}
+
+.player img {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+}

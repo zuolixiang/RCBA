@@ -116,6 +116,7 @@ body {
     max-height: 660px;
     margin: 30px auto 0; /* 使轮播图居中 */
     position: relative;
+    /*text-align: center;*/
 }
 .carousel .slick-track {
     height: calc(100vh - 117px - 30px * 2 - 20px);
@@ -152,4 +153,51 @@ body {
 
 .slick-next {
     right: 10px;
+}
+
+.promo-banner {
+    text-align: center;
+}
+
+/*.nav-links {*/
+/*    list-style: none;*/
+/*    display: flex;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+
+.nav-links li {
+    position: relative;
+    margin: 5px 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+}
+
+.nav-links li:hover > .dropdown {
+    display: block;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: grey;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown a {
+    color: #007bff;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown a:hover {
+    background-color: #007bff;
+    color: white;
 }
