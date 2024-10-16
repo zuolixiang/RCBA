@@ -100,12 +100,12 @@
                 <td colspan="2" class="merged">组内循环阶段</td>
             </tr>
             <!-- 中间的比赛日程 -->
-            {% set date1 = [10, 12, 16, 18, 23, 25] %}
-            {% set matches1 = ['队伍A1 vs 队伍A2', '队伍B1 vs 队伍B2', '队伍A1 vs 队伍A3', '队伍B1 vs 队伍B3', '队伍A2 vs 队伍A3', '队伍B2 vs 队伍B3'] %}
+            {% set date1 = ['10-28', '10-30', '11-04', '11-06', '11-11', '11-13'] %}
+            {% set matches1 = ['A组：稻香 vs 沓星', 'B组：疾风 vs 闪电', 'A组：硬朗 vs 稻香', 'B组：悟空 vs 疾风', 'A组：沓星 vs 硬朗', 'B组：闪电 vs 悟空'] %}
 
             {% for i in range(date1|length) %}
             <tr>
-                <td>2024-10-{{ date1[i] }}</td>
+                <td>2024-{{ date1[i] }}</td>
                 <td>{{ matches1[i] }}</td>
             </tr>
             {% endfor %}
@@ -114,7 +114,7 @@
                 <td colspan="2" class="merged">淘汰赛阶段</td>
             </tr>
             <!-- 剩余比赛日程 -->
-            {% set date2 = ['10-30', '11-1', '11-6', '11-8'] %}
+            {% set date2 = ['11-18', '11-20', '11-25', '11-27'] %}
             {% set matches2 = ['A组第一 vs B组第二', 'A组第二 vs B组第一', '季军赛', '冠军赛'] %}
             {% for i in range(date2|length)  %}
             <tr>
