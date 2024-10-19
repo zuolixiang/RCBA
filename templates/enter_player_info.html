@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>录入球员比赛信息</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 85px;
+            background-color: #007bff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        .navbar-title {
+            color: white;
+            font-size: 24px;
+        }
+
+        .form-section {
+            margin-top: 100px;
+            padding-top: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 15px;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .form-group label {
+            width: 130px;
+            margin-right: 10px;
+            text-align: right;
+        }
+
+        .form-group input,
+        .form-group select {
+            flex: 1;
+            padding: 6px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            max-width: 200px;
+        }
+
+        .form-section button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-section button:hover {
+            background-color: #0056b3;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* 增加顶部间距 */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1 class="navbar-title">录入球员比赛信息</h1>
+    </div>
+
+    <!-- 录入球员统计信息 -->
+    <div class="form-section">
+        <div class="form-group">
+            <label for="year_select">选择年份</label>
+            <select id="year_select"></select>
+        </div>
+
+        <div class="form-group">
+            <label for="match_select">选择比赛场次</label>
+            <select id="match_select"></select>
+        </div>
+
+        <div class="form-group">
+            <label for="team_select">队伍名称</label>
+            <select id="team_select"></select>
+        </div>
+
+        <div class="form-group">
+            <label for="player_name">球员姓名</label>
+            <input type="text" id="player_name" placeholder="请输入球员姓名：如乔丹">
+        </div>
+
+        <div class="form-group">
+            <label for="jersey_number">球衣号</label>
+            <input type="number" id="jersey_number" placeholder="请输入球衣号：如1">
+        </div>
+
+        <div class="form-group">
+            <label for="2pt_attempts">2分球出手次数</label>
+            <input type="number" id="2pt_attempts" value="0">
+        </div>
+
+        <div class="form-group">
+            <label for="2pt_makes">2分球命中次数</label>
+            <input type="number" id="2pt_makes" value="0">
+        </div>
+
+        <div class="form-group">
+            <label for="3pt_attempts">3分球出手次数</label>
+            <input type="number" id="3pt_attempts" value="0">
+        </div>
+
+        <div class="form-group">
+            <label for="3pt_makes">3分球命中次数</label>
+            <input type="number" id="3pt_makes" value="0">
+        </div>
+
+        <div class="form-group">
+            <label for="ft_attempts">罚球次数</label>
+            <input type="number" id="ft_attempts" value="0">
+        </div>
+
+        <div class="form-group">
+            <label for="ft_makes">罚球命中次数</label>
+            <input type="number" id="ft_makes" value="0">
+        </div>
+
+        <div class="form-group">
+            <label for="fouls">犯规次数</label>
+            <input type="number" id="fouls" value="0">
+        </div>
+
+        <div class="form-group">
+            <label for="total_points">总得分</label>
+            <input type="number" id="total_points" value="0">
+        </div>
+
+        <button id="save_player_btn">保存球员数据</button>
+        <button onclick="location.href='{{ url_for('rcbaplayer.add_data') }}'">返回录入信息页</button>
+    </div>
+
+    <script>
+        let matchesData = {};
+
+        // 获取比赛数据并填充年份和场次
+        window.onload = function() {
+            fetch('/data/matches')
+                .then(response => response.json())
+                .then(data => {
+                    matchesData = data;
+                    populateYears();
+                    populateMatches();
+                    populateTeams();  // 确保页面加载时立即填充队伍名称
+                });
+
+        // 添加监听器，自动计算总得分
+        document.getElementById('2pt_makes').addEventListener('input', calculateTotalPoints);
+        document.getElementById('3pt_makes').addEventListener('input', calculateTotalPoints);
+        document.getElementById('ft_makes').addEventListener('input', calculateTotalPoints);
+
+        };
+
+        // 填充年份下拉列表
+        function populateYears() {
+            const yearSelect = document.getElementById('year_select');
+            yearSelect.innerHTML = '';
+
+            Object.keys(matchesData).forEach(year => {
+                const option = document.createElement('option');
+                option.value = year;
+                option.text = year;
+                yearSelect.appendChild(option);
+            });
+
+            populateMatches(); // 自动填充选中的年份对应的比赛
+        }
+
+        // 根据选择的年份填充比赛场次下拉列表
+        function populateMatches() {
+            const year = document.getElementById('year_select').value;
+            const matchSelect = document.getElementById('match_select');
+            matchSelect.innerHTML = '';
+
+            if (matchesData[year]) {
+                matchesData[year].matches.forEach((match, index) => {
+                    const option = document.createElement('option');
+                    option.value = match.match_id;
+                    option.text = match.match_id;
+                    matchSelect.appendChild(option);
+                });
+            }
+
+            populateTeams();
+        }
+
+        // 填充队伍名称下拉列表
+        function populateTeams() {
+            const year = document.getElementById('year_select').value;
+            const matchId = document.getElementById('match_select').value;
+            const teamSelect = document.getElementById('team_select');
+            teamSelect.innerHTML = '';
+
+            console.log('Selected year:', year);
+            console.log('Selected match ID:', matchId);
+
+            // 找到对应的比赛
+            const match = matchesData[year].matches.find(m => m.match_id === matchId);
+            if (match) {
+                const homeTeam = match.match_info.home_team;
+                const guestTeam = match.match_info.guest_team;
+
+                const homeOption = document.createElement('option');
+                homeOption.value = homeTeam;
+                homeOption.text = homeTeam;
+                teamSelect.appendChild(homeOption);
+
+                const guestOption = document.createElement('option');
+                guestOption.value = guestTeam;
+                guestOption.text = guestTeam;
+                teamSelect.appendChild(guestOption);
+            }
+        }
+
+            // 自动计算总得分
+        function calculateTotalPoints() {
+            const twoPtMakes = parseInt(document.getElementById('2pt_makes').value) || 0;
+            const threePtMakes = parseInt(document.getElementById('3pt_makes').value) || 0;
+            const ftMakes = parseInt(document.getElementById('ft_makes').value) || 0;
+
+            const totalPoints = (twoPtMakes * 2) + (threePtMakes * 3) + ftMakes;
+
+            // 更新总得分
+            document.getElementById('total_points').value = totalPoints;
+        }
+
+        // 添加年份选择事件监听器
+        document.getElementById('year_select').addEventListener('change', () => {
+            populateMatches();
+            populateTeams();  // 更新比赛场次后立即填充队伍
+        });
+        document.getElementById('match_select').addEventListener('change', populateTeams);
+
+
+        // 球员数据保存
+        document.getElementById('save_player_btn').addEventListener('click', () => {
+            const selectedYear = document.getElementById('year_select').value;
+            const selectedMatchIndex = document.getElementById('match_select').value;
+            const selectedTeam = document.getElementById('team_select').value;
+            const playerName = document.getElementById('player_name').value;
+            const jerseyNumber = document.getElementById('jersey_number').value;
+            const twoPtAttempts = document.getElementById('2pt_attempts').value;
+            const twoPtMakes = document.getElementById('2pt_makes').value;
+            const threePtAttempts = document.getElementById('3pt_attempts').value;
+            const threePtMakes = document.getElementById('3pt_makes').value;
+            const ftAttempts = document.getElementById('ft_attempts').value;
+            const ftMakes = document.getElementById('ft_makes').value;
+            const fouls = document.getElementById('fouls').value;
+            const totalPoints = document.getElementById('total_points').value;
+
+            // 非空校验
+            if (playerName && selectedMatchIndex) {
+                const playerData = {
+                    team: selectedTeam,
+                    name: playerName,
+                    jersey_number: jerseyNumber,
+                    "2pt_attempts": twoPtAttempts,
+                    "2pt_makes": twoPtMakes,
+                    "3pt_attempts": threePtAttempts,
+                    "3pt_makes": threePtMakes,
+                    "ft_attempts": ftAttempts,
+                    "ft_makes": ftMakes,
+                    fouls: fouls,
+                    total_points: totalPoints
+                };
+
+                // 发送数据到后端
+                fetch('/update_player_data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        year: selectedYear,
+                        match_id: selectedMatchIndex,
+                        player_data: playerData
+                    })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert('球员数据已保存！');
+                    } else {
+                        alert('保存失败：' + result.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                alert('请填写所有必填项！');
+            }
+        });
+    </script>
+
+</body>
+</html>

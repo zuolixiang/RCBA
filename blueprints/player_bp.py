@@ -16,22 +16,29 @@ rcbaplayer = Blueprint('rcbaplayer', __name__, template_folder='templates')
 
 
 current_file_path = os.path.dirname(os.path.abspath(__file__))
+
+
 # 读取球员数据
 def load_json_data(filename, key):
     with open(filename, 'r') as file:
         return json.load(file)[key]
+
 
 # 保存球员数据
 def save_players(players):
     with open(current_file_path + '/../data/players.json', 'w', encoding='utf8') as file:
         json.dump({"players": players}, file, indent=4, ensure_ascii=False)
 
+
 players_json = current_file_path + '/../data/players.json'
 teams_json = current_file_path + '/../data/teams.json'
+match_json = current_file_path + '/../data/match_statistics.json'
 
 players = load_json_data(players_json, 'players')
 teams = load_json_data(teams_json, 'teams')
 comp_teams_2024 = load_json_data(teams_json, 'comp_teams_2024')
+# matches = load_json_data(match_json, 'years')
+
 
 # 首页
 @rcbaplayer.route('/')
@@ -90,8 +97,6 @@ def player():
         "per_page": per_page,
         "page": page,
     }
-
-    # return render_template('players.html', players=paginated_players, page=page, per_page=per_page, total_players=total_players)
     return render_template('players.html', **context)
 
 
@@ -170,6 +175,146 @@ def get_comparison_data(player1_id, player2_id):
         return jsonify({'error': 'Player not found'}), 404
 
 
+# 数据页
+@rcbaplayer.route('/data', methods=['GET', 'POST'])
+def data():
+    pass
+
+
+@rcbaplayer.route('/data/add', methods=['GET'])
+def add_data():
+    # 检查用户是否已登录且是否为管理员
+    if session['username'] not in ('hailiyang', '陆智卿'):
+        return render_template('error.html')
+    return render_template('enter_info.html')
+
+
+# 录入比赛基本信息页
+@rcbaplayer.route('/data/entercompdata')
+def enter_comp_info():
+    return render_template('enter_comp_info.html')
+
+
+# 保存比赛基本信息的路由
+@rcbaplayer.route('/save_match', methods=['POST'])
+def save_match():
+    match_data = request.get_json()
+    print(match_data)
+
+    # 检查是否存在 json 文件，如果不存在则创建
+    if not os.path.exists(match_json):
+        with open(match_json, 'w') as f:
+            json.dump([], f)
+
+    match_year = match_data['match_year']
+    match_id = match_data['match_id']
+    match_date = match_data['match_date']
+    home_team = match_data['home_team']
+    guest_team = match_data['guest_team']
+    print(match_year, match_id, match_date, home_team, guest_team)
+
+    matches = {}
+    with open(match_json, 'r') as f:
+        matches = json.load(f)
+
+    # 如果该年份不存在，创建新的年份条目
+    if match_year not in matches:
+        matches[match_year] = {"matches": []}
+
+    match_id_list = []
+    if matches[match_year]['matches']:
+        match_id_list = [x['match_id'] for x in matches[match_year]['matches']]
+
+    # 如果该场比赛不存在，创建新的比赛条目
+    if match_id not in match_id_list:
+        match = {
+            'match_id': match_id,
+            'match_info': {
+                "match_date": match_date,
+                "home_team": home_team,
+                "guest_team": guest_team,
+                "players": []  # 初始化players为空
+            }
+        }
+        matches[match_year]['matches'].append(match)
+    else:
+        print(f"比赛 {match_id} 已经存在于 {match_year} 年，无法重复初始化。")
+
+    # 将更新后的数据写回 comp.json
+    with open(match_json, 'w') as f:
+        json.dump(matches, f, ensure_ascii=False, indent=4)
+
+    return jsonify({"success": True})
+
+
+# 获取比赛统计数据
+@rcbaplayer.route('/data/matches')
+def get_matches():
+    with open(match_json, 'r') as file:
+        matches = json.load(file)
+        return matches
+
+
+# 录入球员比赛信息数据
+@rcbaplayer.route('/data/enterplayerdata')
+def enter_player_info():
+    return render_template('enter_player_info.html')
+
+
+# 保存球员比赛信息数据
+@rcbaplayer.route('/update_player_data', methods=['POST'])
+def update_player_data():
+    data = request.get_json()  # 获取前端提交的数据
+    year = data.get('year')  # 获取年份
+    match_id = data.get('match_id')  # 获取比赛的 match_id
+    player_data = data.get('player_data')  # 获取球员数据
+    player_team = player_data.get('team')
+    player_name = player_data.get('name')
+
+    # 加载现有比赛数据
+    matches = get_matches()
+
+    # 检查数据是否正确
+    if year in matches and 'matches' in matches[year]:
+        # 找到对应的比赛
+        match_list = matches[year]['matches']
+        match_found = False
+
+        print(match_list)
+        for match in match_list:
+            print(match['match_id'], match_id)
+            if match['match_id'] == match_id:
+                # 找到对应比赛，确保 match_info 和 players 字段存在
+                if 'match_info' in match and 'players' in match['match_info']:
+                    players = match['match_info']['players']
+                    player_exists = False
+
+                    # 遍历现有的球员列表，检查该球员是否已经存在
+                    for existing_player in players:
+                        if existing_player['name'] == player_name and existing_player['team'] == player_team:
+                            # 如果球员存在，更新其数据
+                            existing_player.update(player_data)
+                            player_exists = True
+                            break
+
+                    # 如果球员不存在，添加新球员数据
+                    if not player_exists:
+                        players.append(player_data)
+
+                    match_found = True
+                    break
+
+        if match_found:
+            # 保存更新后的比赛数据到 JSON 文件
+            with open(match_json, 'w') as f:
+                json.dump(matches, f, ensure_ascii=False, indent=4)
+            return jsonify({"success": True, "message": "球员数据已保存"})
+        else:
+            return jsonify({"success": False, "message": "未找到该比赛场次"}), 400
+    else:
+        return jsonify({"success": False, "message": "未找到该年份的比赛"}), 400
+
+
 # 登录页
 @rcbaplayer.route('/login', methods=['GET', 'POST'])
 def login():
@@ -181,9 +326,8 @@ def login():
         # Logic for role enforcement
         if username in ('hailiyang', '陆智卿') and role != 'admin':
             return f" {username} must be an admin! 403"
-        elif username not in ('hailiyang', '陆智卿')  and role == 'admin':
+        elif username not in ('hailiyang', '陆智卿') and role == 'admin':
             return "对不起，您不是管理员，请用自己姓名作为用户名，选择普通用户登录!", 403
-
 
         # 设置 session 信息
         session['username'] = username
