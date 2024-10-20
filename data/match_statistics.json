@@ -189,19 +189,6 @@
                             "ft_makes": "0",
                             "fouls": "1",
                             "total_points": "0"
-                        },
-                        {
-                            "team": "硬核",
-                            "name": "女生投篮",
-                            "jersey_number": "0",
-                            "two_point_attempts": "0",
-                            "two_point_makes": "0",
-                            "three_point_attempts": "0",
-                            "three_point_makes": "0",
-                            "ft_attempts": "5",
-                            "ft_makes": "2",
-                            "fouls": "0",
-                            "total_points": "2"
                         }
                     ]
                 }

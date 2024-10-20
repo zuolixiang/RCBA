@@ -350,13 +350,14 @@
                             });
                         }
 
+                        debugger
                         if (!guestGirlFt || guestGirlFt.length == 0) {
-                            guestGirlFt = [{
+                            guestGirlFt.push({
                                 ft_attempts: 0,
                                 ft_makes: 0,
                                 fouls: 0,
                                 total_points: 0
-                            }];
+                            });
                         }
 
                         if (guestGirlFt) {
