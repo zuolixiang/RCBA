@@ -289,15 +289,15 @@
 
                         // 确保即使没有女生投篮数据，汇总行也能显示
                         if (!homeGirlFt || homeGirlFt.length == 0) {
-                            homeGirlFt = [{
+                            homeGirlFt.push({
                                 ft_attempts: 0,
                                 ft_makes: 0,
                                 fouls: 0,
                                 total_points: 0
-                            }];
+                            });
                         }
 
-                        if (homeGirlFt) {
+                        if (homeGirlFt && homeGirlFt[0].ft_attempts > 0) {
                             $('#home-team-table').append(
                                 `<tr>
                                     <td colspan="6" style="text-align: center;">女生投篮</td>
@@ -350,7 +350,6 @@
                             });
                         }
 
-                        debugger
                         if (!guestGirlFt || guestGirlFt.length == 0) {
                             guestGirlFt.push({
                                 ft_attempts: 0,
@@ -360,7 +359,7 @@
                             });
                         }
 
-                        if (guestGirlFt) {
+                        if (guestGirlFt && guestGirlFt[0].ft_attempts > 0) {
                             $('#guest-team-table').append(
                                 `<tr>
                                     <td colspan="6" style="text-align: center;">女生投篮</td>
