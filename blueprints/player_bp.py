@@ -184,7 +184,7 @@ def data():
 @rcbaplayer.route('/data/add', methods=['GET'])
 def add_data():
     # 检查用户是否已登录且是否为管理员
-    if session['username'] not in ('hailiyang', '陆智卿'):
+    if session['username'] not in ('hailiyang', '陆智卿', '赵永会'):
         return render_template('error.html')
     return render_template('enter_info.html')
 
@@ -339,11 +339,9 @@ def filter_match_data(match_year, match_id):
 @rcbaplayer.route('/filter_data', methods=['POST'])
 def filter_data():
     match_year = request.form['match_year']
-    print("match_year: ", match_year)
     match_round = request.form['match_round']
 
     home_team, guest_team, home_team_players, guest_team_players, home_girl_ft, guest_girl_ft = filter_match_data(match_year, match_round)
-    print(home_girl_ft, guest_girl_ft)
     # 返回JSON数据
     return jsonify({
         'home_team': home_team,
@@ -394,9 +392,9 @@ def login():
         role = request.form['role']  # 'admin' or 'user'
 
         # Logic for role enforcement
-        if username in ('hailiyang', '陆智卿') and role != 'admin':
+        if username in ('hailiyang', '陆智卿', '赵永会') and role != 'admin':
             return f" {username} must be an admin! 403"
-        elif username not in ('hailiyang', '陆智卿') and role == 'admin':
+        elif username not in ('hailiyang', '陆智卿', '赵永会') and role == 'admin':
             return "对不起，您不是管理员，请用自己姓名作为用户名，选择普通用户登录!", 403
 
         # 设置 session 信息
