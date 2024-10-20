@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bar.css') }}">
+    <title>查看历史数据</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; /* 去掉默认 margin */
+            padding: 0;
+        }
+        /* 给表单容器增加 margin-top 以避免被导航栏覆盖 */
+        #filter-form {
+            margin-top: 100px; /* 增加足够的上边距 */
+            padding: 20px;
+            text-align: center; /* 居中对齐 */
+        }
+
+        /* 筛选框和按钮样式 */
+        select, button {
+            padding: 8px 12px;
+            margin: 0 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px; /* 增加圆角 */
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* 按钮悬停效果 */
+        }
+
+        /* 表格容器样式，使用 flexbox 布局 */
+        #match-tables {
+            display: flex;
+            justify-content: space-around; /* 左右并排显示 */
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 45%; /* 调整表格宽度 */
+            border-collapse: collapse;
+            margin: 0 20px; /* 调整表格之间的间距 */
+            text-align: center;
+            table-layout: fixed;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* 增大主队和客队 caption 字体大小 */
+        caption {
+            font-size: 24px; /* 设置更大的字体大小 */
+            font-weight: bold; /* 设置加粗 */
+            padding: 10px; /* 添加一点间距 */
+        }
+
+        /* 标题样式 */
+        h2 {
+            text-align: center; /* 标题居中 */
+            margin-top: 50px; /* 增加上边距 */
+        }
+
+        .summary {
+            font-weight: bold; /* 加粗汇总行 */
+            background-color: #f2f2f2; /* 背景颜色 */
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+
+    <div class="navbar">
+        <ul class="nav-links">
+            <li><a href="{{ url_for('rcbaplayer.index') }}">首页</a></li>
+            <li><a href="#">历年比赛数据</a></li>
+        </ul>
+    </div>
+
+    <!-- 筛选表单 -->
+    <form id="filter-form">
+        <label for="match_year">选择比赛时间:</label>
+        <select id="match_year" name="match_year">
+            <!-- 比赛时间通过 JavaScript 动态加载 -->
+        </select>
+
+        <label for="match_round">选择比赛场次:</label>
+        <select id="match_round" name="match_round">
+            <!-- 比赛场次通过 JavaScript 动态加载 -->
+        </select>
+
+        <button type="button" id="submit-btn">确定</button>
+    </form>
+
+    <!-- 数据表格 -->
+    <h2>比赛双方数据</h2>
+
+    <div id="match-tables">
+        <!-- 主队表格 -->
+        <table id="home-team-table">
+            <caption>主队 : <span id="home-team"></span></caption>
+            <tr>
+                <th>球员</th>
+                <th>号码</th>
+                <th>二分出手</th>
+                <th>二分命中</th>
+                <th>三分出手</th>
+                <th>三分命中</th>
+                <th>罚篮出手</th>
+                <th>罚篮命中</th>
+                <th>犯规</th>
+                <th>得分</th>
+            </tr>
+        </table>
+
+        <!-- 客队表格 -->
+        <table id="guest-team-table">
+            <caption>客队 : <span id="guest-team"></span></caption>
+            <tr>
+                <th>球员</th>
+                <th>号码</th>
+                <th>二分出手</th>
+                <th>二分命中</th>
+                <th>三分出手</th>
+                <th>三分命中</th>
+                <th>罚篮出手</th>
+                <th>罚篮命中</th>
+                <th>犯规</th>
+                <th>得分</th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // 页面加载时，获取默认的比赛时间和比赛场次
+            loadInitialData();
+
+            // 当比赛时间改变时，更新比赛场次并加载比赛数据
+            $('#match_year').on('change', function() {
+                const matchYear = $(this).val();
+                updateMatchRoundsAndData(matchYear);
+            });
+
+            // 监听 "确定" 按钮点击事件，手动获取比赛数据
+            $('#submit-btn').on('click', function() {
+                const matchYear = $('#match_year').val();
+                const matchRound = $('#match_round').val();
+                fetchMatchData(matchYear, matchRound);
+            });
+
+            // 页面加载时获取初始数据
+            function loadInitialData() {
+                $.ajax({
+                    url: "{{ url_for('rcbaplayer.get_initial_data') }}",  // 后端获取初始数据的路由
+                    method: 'GET',
+                    success: function(response) {
+                        // 加载比赛时间
+                        $('#match_year').empty();
+                        response.match_years.forEach(function(year) {
+                            $('#match_year').append(`<option value="${year}">${year}</option>`);
+                        });
+
+                        // 加载第一年的比赛场次并显示第一个场次的数据
+                        if (response.match_years.length > 0) {
+                            const firstMatchYear = response.match_years[0];
+                            updateMatchRoundsAndData(firstMatchYear);
+                        }
+                    }
+                });
+            }
+
+            // 更新比赛场次和数据的函数
+            function updateMatchRoundsAndData(matchYear) {
+                $.ajax({
+                    url: "{{ url_for('rcbaplayer.get_match_rounds') }}",  // 后端获取场次的路由
+                    method: 'POST',
+                    data: { match_year: matchYear },
+                    success: function(response) {
+                        $('#match_round').empty();
+                        response.match_rounds.forEach(function(round) {
+                            $('#match_round').append(`<option value="${round}">${round}</option>`);
+                        });
+
+                        // 自动加载第一个场次的数据
+                        if (response.match_rounds.length > 0) {
+                            const firstMatchRound = response.match_rounds[0];  // 选择第一个场次
+                            fetchMatchData(matchYear, firstMatchRound);
+                        }
+                    }
+                });
+            }
+
+            // 封装的汇总计算函数，支持女生投篮数据
+            function calculateSummary(players, femaleShootData) {
+                const summary = {
+                    two_point_attempts: 0,
+                    two_point_makes: 0,
+                    three_point_attempts: 0,
+                    three_point_makes: 0,
+                    ft_attempts: 0,
+                    ft_makes: 0,
+                    fouls: 0,
+                    total_points: 0
+                };
+
+                // 汇总普通球员数据
+                players.forEach(player => {
+                    summary.two_point_attempts += Number(player.two_point_attempts); // 确保是数值类型
+                    summary.two_point_makes += Number(player.two_point_makes);
+                    summary.three_point_attempts += Number(player.three_point_attempts);
+                    summary.three_point_makes += Number(player.three_point_makes);
+                    summary.ft_attempts += Number(player.ft_attempts);
+                    summary.ft_makes += Number(player.ft_makes);
+                    summary.fouls += Number(player.fouls);
+                    summary.total_points += Number(player.total_points);
+                });
+
+                // 汇总女生投篮数据（仅罚篮、犯规、得分部分）
+                if (femaleShootData) {
+                    summary.ft_attempts += Number(femaleShootData[0].ft_attempts);
+                    summary.ft_makes += Number(femaleShootData[0].ft_makes);
+                    summary.fouls += Number(femaleShootData[0].fouls);
+                    summary.total_points += Number(femaleShootData[0].total_points);
+                }
+
+                return summary;
+            }
+
+
+            // 获取比赛数据的函数
+            function fetchMatchData(matchYear, matchRound) {
+                $.ajax({
+                    url: "{{ url_for('rcbaplayer.filter_data') }}",  // 后端获取比赛数据的路由
+                    method: 'POST',
+                    data: {
+                        match_year: matchYear,
+                        match_round: matchRound
+                    },
+                    success: function(response) {
+                        // 清空原来的表格内容
+                        $('#home-team-table').find("tr:gt(0)").remove();
+                        $('#guest-team-table').find("tr:gt(0)").remove();
+
+                        // 更新主队表格
+                        const homeTeam = response.home_team;
+                        const guestTeam = response.guest_team;
+                        $('#home-team').text(` ${homeTeam}`);
+                        $('#guest-team').text(` ${guestTeam}`);
+
+                        // 插入女生投篮数据
+                        const homeGirlFt = response.home_girl_ft; // 主队女生投篮
+                        const homePlayers = response.home_team_players;
+
+                        if (homePlayers) {
+                            homePlayers.forEach(player => {
+                                $('#home-team-table').append(
+                                    `<tr>
+                                        <td>${player.name}</td>
+                                        <td>${player.jersey_number}</td>
+                                        <td>${player.two_point_attempts}</td>
+                                        <td>${player.two_point_makes}</td>
+                                        <td>${player.three_point_attempts}</td>
+                                        <td>${player.three_point_makes}</td>
+                                        <td>${player.ft_attempts}</td>
+                                        <td>${player.ft_makes}</td>
+                                        <td>${player.fouls}</td>
+                                        <td>${player.total_points}</td>
+                                    </tr>`
+                                );
+                            });
+                        }
+
+                        // 确保即使没有女生投篮数据，汇总行也能显示
+                        if (!homeGirlFt || homeGirlFt.length == 0) {
+                            homeGirlFt = [{
+                                ft_attempts: 0,
+                                ft_makes: 0,
+                                fouls: 0,
+                                total_points: 0
+                            }];
+                        }
+
+                        if (homeGirlFt) {
+                            $('#home-team-table').append(
+                                `<tr>
+                                    <td colspan="6" style="text-align: center;">女生投篮</td>
+                                    <td>${Number(homeGirlFt[0].ft_attempts)}</td>
+                                    <td>${Number(homeGirlFt[0].ft_makes)}</td>
+                                    <td>${Number(homeGirlFt[0].fouls)}</td>
+                                    <td>${Number(homeGirlFt[0].total_points)}</td>
+                                </tr>`
+                            );
+                        }
+
+                        const homeSummary = calculateSummary(homePlayers, homeGirlFt);
+
+                        // 添加主队汇总行
+                        $('#home-team-table').append(
+                            `<tr class="summary">
+                                <td>汇总</td>
+                                <td></td>
+                                <td>${homeSummary.two_point_attempts}</td>
+                                <td>${homeSummary.two_point_makes}</td>
+                                <td>${homeSummary.three_point_attempts}</td>
+                                <td>${homeSummary.three_point_makes}</td>
+                                <td>${homeSummary.ft_attempts}</td>
+                                <td>${homeSummary.ft_makes}</td>
+                                <td>${homeSummary.fouls}</td>
+                                <td>${homeSummary.total_points}</td>
+                            </tr>`
+                        );
+
+                        // 更新客队表格
+                        const guestGirlFt = response.guest_girl_ft; // 客队女生投篮
+                        const guestPlayers = response.guest_team_players;
+
+                        if (guestPlayers) {
+                            guestPlayers.forEach(player => {
+                                $('#guest-team-table').append(
+                                    `<tr>
+                                        <td>${player.name}</td>
+                                        <td>${player.jersey_number}</td>
+                                        <td>${player.two_point_attempts}</td>
+                                        <td>${player.two_point_makes}</td>
+                                        <td>${player.three_point_attempts}</td>
+                                        <td>${player.three_point_makes}</td>
+                                        <td>${player.ft_attempts}</td>
+                                        <td>${player.ft_makes}</td>
+                                        <td>${player.fouls}</td>
+                                        <td>${player.total_points}</td>
+                                    </tr>`
+                                );
+                            });
+                        }
+
+                        if (!guestGirlFt || guestGirlFt.length == 0) {
+                            guestGirlFt = [{
+                                ft_attempts: 0,
+                                ft_makes: 0,
+                                fouls: 0,
+                                total_points: 0
+                            }];
+                        }
+
+                        if (guestGirlFt) {
+                            $('#guest-team-table').append(
+                                `<tr>
+                                    <td colspan="6" style="text-align: center;">女生投篮</td>
+                                    <td>${Number(guestGirlFt[0].ft_attempts)}</td>
+                                    <td>${Number(guestGirlFt[0].ft_makes)}</td>
+                                    <td>${Number(guestGirlFt[0].fouls)}</td>
+                                    <td>${Number(guestGirlFt[0].total_points)}</td>
+                                </tr>`
+                            );
+                        }
+
+                        const guestSummary = calculateSummary(guestPlayers, guestGirlFt);
+
+                        // 添加客队汇总行
+                        $('#guest-team-table').append(
+                            `<tr class="summary">
+                                <td>汇总</td>
+                                <td></td>
+                                <td>${guestSummary.two_point_attempts}</td>
+                                <td>${guestSummary.two_point_makes}</td>
+                                <td>${guestSummary.three_point_attempts}</td>
+                                <td>${guestSummary.three_point_makes}</td>
+                                <td>${guestSummary.ft_attempts}</td>
+                                <td>${guestSummary.ft_makes}</td>
+                                <td>${guestSummary.fouls}</td>
+                                <td>${guestSummary.total_points}</td>
+                            </tr>`
+                        );
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

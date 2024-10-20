@@ -119,47 +119,47 @@
 
         <div class="form-group">
             <label for="jersey_number">球衣号</label>
-            <input type="number" id="jersey_number" placeholder="请输入球衣号：如1">
+            <input type="number" id="jersey_number" placeholder="请输入球衣号：如1" min="0">
         </div>
 
         <div class="form-group">
-            <label for="2pt_attempts">2分球出手次数</label>
-            <input type="number" id="2pt_attempts" value="0">
+            <label for="two_point_attempts">2分球出手次数</label>
+            <input type="number" id="two_point_attempts" value="0" min="0">
         </div>
 
         <div class="form-group">
-            <label for="2pt_makes">2分球命中次数</label>
-            <input type="number" id="2pt_makes" value="0">
+            <label for="two_point_makes">2分球命中次数</label>
+            <input type="number" id="two_point_makes" value="0" min="0">
         </div>
 
         <div class="form-group">
-            <label for="3pt_attempts">3分球出手次数</label>
-            <input type="number" id="3pt_attempts" value="0">
+            <label for="three_point_attempts">3分球出手次数</label>
+            <input type="number" id="three_point_attempts" value="0" min="0">
         </div>
 
         <div class="form-group">
-            <label for="3pt_makes">3分球命中次数</label>
-            <input type="number" id="3pt_makes" value="0">
+            <label for="three_point_makes">3分球命中次数</label>
+            <input type="number" id="three_point_makes" value="0" min="0">
         </div>
 
         <div class="form-group">
             <label for="ft_attempts">罚球次数</label>
-            <input type="number" id="ft_attempts" value="0">
+            <input type="number" id="ft_attempts" value="0" min="0">
         </div>
 
         <div class="form-group">
             <label for="ft_makes">罚球命中次数</label>
-            <input type="number" id="ft_makes" value="0">
+            <input type="number" id="ft_makes" value="0" min="0">
         </div>
 
         <div class="form-group">
             <label for="fouls">犯规次数</label>
-            <input type="number" id="fouls" value="0">
+            <input type="number" id="fouls" value="0" min="0">
         </div>
 
         <div class="form-group">
             <label for="total_points">总得分</label>
-            <input type="number" id="total_points" value="0">
+            <input type="number" id="total_points" value="0" min="0">
         </div>
 
         <button id="save_player_btn">保存球员数据</button>
@@ -181,8 +181,8 @@
                 });
 
         // 添加监听器，自动计算总得分
-        document.getElementById('2pt_makes').addEventListener('input', calculateTotalPoints);
-        document.getElementById('3pt_makes').addEventListener('input', calculateTotalPoints);
+        document.getElementById('two_point_makes').addEventListener('input', calculateTotalPoints);
+        document.getElementById('three_point_makes').addEventListener('input', calculateTotalPoints);
         document.getElementById('ft_makes').addEventListener('input', calculateTotalPoints);
 
         };
@@ -250,8 +250,8 @@
 
             // 自动计算总得分
         function calculateTotalPoints() {
-            const twoPtMakes = parseInt(document.getElementById('2pt_makes').value) || 0;
-            const threePtMakes = parseInt(document.getElementById('3pt_makes').value) || 0;
+            const twoPtMakes = parseInt(document.getElementById('two_point_makes').value) || 0;
+            const threePtMakes = parseInt(document.getElementById('three_point_makes').value) || 0;
             const ftMakes = parseInt(document.getElementById('ft_makes').value) || 0;
 
             const totalPoints = (twoPtMakes * 2) + (threePtMakes * 3) + ftMakes;
@@ -275,10 +275,10 @@
             const selectedTeam = document.getElementById('team_select').value;
             const playerName = document.getElementById('player_name').value;
             const jerseyNumber = document.getElementById('jersey_number').value;
-            const twoPtAttempts = document.getElementById('2pt_attempts').value;
-            const twoPtMakes = document.getElementById('2pt_makes').value;
-            const threePtAttempts = document.getElementById('3pt_attempts').value;
-            const threePtMakes = document.getElementById('3pt_makes').value;
+            const twoPtAttempts = document.getElementById('two_point_attempts').value;
+            const twoPtMakes = document.getElementById('two_point_makes').value;
+            const threePtAttempts = document.getElementById('three_point_attempts').value;
+            const threePtMakes = document.getElementById('three_point_makes').value;
             const ftAttempts = document.getElementById('ft_attempts').value;
             const ftMakes = document.getElementById('ft_makes').value;
             const fouls = document.getElementById('fouls').value;
@@ -290,10 +290,10 @@
                     team: selectedTeam,
                     name: playerName,
                     jersey_number: jerseyNumber,
-                    "2pt_attempts": twoPtAttempts,
-                    "2pt_makes": twoPtMakes,
-                    "3pt_attempts": threePtAttempts,
-                    "3pt_makes": threePtMakes,
+                    "two_point_attempts": twoPtAttempts,
+                    "two_point_makes": twoPtMakes,
+                    "three_point_attempts": threePtAttempts,
+                    "three_point_makes": threePtMakes,
                     "ft_attempts": ftAttempts,
                     "ft_makes": ftMakes,
                     fouls: fouls,

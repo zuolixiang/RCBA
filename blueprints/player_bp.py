@@ -315,6 +315,76 @@ def update_player_data():
         return jsonify({"success": False, "message": "未找到该年份的比赛"}), 400
 
 
+# 过滤展示比赛信息
+def filter_match_data(match_year, match_id):
+    data = get_matches()
+
+    if match_year in data:
+        home_team, guest_team, home_team_players, guest_team_players = '', '', [], []
+        home_girl_ft, guest_girl_ft = [], []
+        for match in data[match_year]['matches']:
+            if match['match_info'] and match['match_id'] == match_id:
+                players = match['match_info']['players']
+                # 按队伍分组球员
+                home_team = match['match_info']['home_team']
+                guest_team = match['match_info']['guest_team']
+                home_team_players = [player for player in players if player['team'] == home_team and player['name'] != '女生投篮']
+                guest_team_players = [player for player in players if player['team'] == guest_team and player['name'] != '女生投篮']
+                home_girl_ft = [player for player in players if player['team'] == home_team and player['name'] == '女生投篮']
+                guest_girl_ft = [player for player in players if player['team'] == guest_team and player['name'] == '女生投篮']
+        return home_team, guest_team, home_team_players, guest_team_players, home_girl_ft, guest_girl_ft
+    return '', '', [], []
+
+
+@rcbaplayer.route('/filter_data', methods=['POST'])
+def filter_data():
+    match_year = request.form['match_year']
+    print("match_year: ", match_year)
+    match_round = request.form['match_round']
+
+    home_team, guest_team, home_team_players, guest_team_players, home_girl_ft, guest_girl_ft = filter_match_data(match_year, match_round)
+    print(home_girl_ft, guest_girl_ft)
+    # 返回JSON数据
+    return jsonify({
+        'home_team': home_team,
+        'guest_team': guest_team,
+        'home_team_players': home_team_players,
+        'guest_team_players': guest_team_players,
+        'home_girl_ft': home_girl_ft,
+        'guest_girl_ft': guest_girl_ft,
+    })
+
+
+@rcbaplayer.route('/data/history', methods=['GET', 'POST'])
+def data_history():
+    data = get_matches()
+    return render_template('show_comp_info.html', match_dates=data)
+
+
+def get_match_rounds_by_date(match_year):
+    data = get_matches()
+    match_rounds = []
+    if match_year in data:
+        for match in data[match_year]['matches']:
+            match_rounds.append(match['match_id'])
+    return match_rounds
+
+
+@rcbaplayer.route('/get_match_rounds', methods=['POST'])
+def get_match_rounds():
+    match_year = request.form['match_year']
+    match_rounds = get_match_rounds_by_date(match_year)
+    return jsonify({'match_rounds': match_rounds})
+
+
+@rcbaplayer.route('/get_initial_data', methods=['GET'])
+def get_initial_data():
+    data = get_matches()
+    # 获取比赛的年份
+    match_years = list(data.keys())  # 需要定义函数，获取所有年份
+    return jsonify({'match_years': match_years})
+
+
 # 登录页
 @rcbaplayer.route('/login', methods=['GET', 'POST'])
 def login():
