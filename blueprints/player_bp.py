@@ -137,7 +137,7 @@ def player_show(player_id):
             except ValueError:
                 return "Invalid input", 400
 
-            return redirect(url_for('rcbaplayer.index'))
+            return redirect(url_for('rcbaplayer.player'))
         else:
             return "对不起，你只能修改自己的信息！", 403
 
@@ -184,7 +184,7 @@ def data():
 @rcbaplayer.route('/data/add', methods=['GET'])
 def add_data():
     # 检查用户是否已登录且是否为管理员
-    if session['username'] not in ('hailiyang', '陆智卿', '赵永会'):
+    if session['username'] not in ('杨海力', '陆智卿', '赵永会'):
         return render_template('error.html')
     return render_template('enter_info.html')
 
@@ -383,6 +383,43 @@ def get_initial_data():
     return jsonify({'match_years': match_years})
 
 
+# 个人主页路由
+@rcbaplayer.route('/profile')
+def profile():
+    username = session.get('username')
+
+    # 查找是否有当前用户的记录
+    player_info = next((player for player in players if player['name'] == username), None)
+
+    if player_info:
+        return render_template('profile.html', player=player_info)
+    else:
+        return "很遗憾，你不是现役球员，没有个人信息页！"
+
+
+# 编辑页面路由
+@rcbaplayer.route('/profile/edit', methods=['GET', 'POST'])
+def edit_profile():
+    username = session.get('username')
+    player_info = next((player for player in players if player['name'] == username), None)
+    print(player_info)
+    if not player_info:
+        return "你不是现役球员，无法编辑信息"
+
+    if request.method == 'POST':
+        # 获取用户提交的表单数据并更新
+        player_info['height'] = request.form['height']
+        player_info['weight'] = request.form['weight']
+        player_info['team_name'] = request.form['team_name']
+        player_info['jersey_number'] = request.form['jersey_number']
+        player_info['years_played'] = request.form['years_played']
+
+        save_players(players)
+        return redirect(url_for('rcbaplayer.profile'))
+    teams_info = [team['team_name'] for team in teams]
+    return render_template('edit_profile.html', player=player_info, teams_info=teams_info)
+
+
 # 登录页
 @rcbaplayer.route('/login', methods=['GET', 'POST'])
 def login():
@@ -392,9 +429,9 @@ def login():
         role = request.form['role']  # 'admin' or 'user'
 
         # Logic for role enforcement
-        if username in ('hailiyang', '陆智卿', '赵永会') and role != 'admin':
+        if username in ('杨海力', '陆智卿', '赵永会') and role != 'admin':
             return f" {username} must be an admin! 403"
-        elif username not in ('hailiyang', '陆智卿', '赵永会') and role == 'admin':
+        elif username not in ('杨海力', '陆智卿', '赵永会') and role == 'admin':
             return "对不起，您不是管理员，请用自己姓名作为用户名，选择普通用户登录!", 403
 
         # 设置 session 信息

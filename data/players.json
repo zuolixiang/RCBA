@@ -15,7 +15,11 @@
                 "stamina": 100,
                 "charisma": 100
             },
-            "comp_team": "硬朗"
+            "comp_team": "硬朗",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 2,
@@ -32,7 +36,11 @@
                 "stamina": 85,
                 "charisma": 81
             },
-            "comp_team": "悟空"
+            "comp_team": "悟空",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 3,
@@ -49,7 +57,11 @@
                 "stamina": 85,
                 "charisma": 90
             },
-            "comp_team": "稻香"
+            "comp_team": "稻香",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 4,
@@ -66,7 +78,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "稻香"
+            "comp_team": "稻香",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 5,
@@ -83,7 +99,11 @@
                 "stamina": 8,
                 "charisma": 100
             },
-            "comp_team": "硬朗"
+            "comp_team": "硬朗",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 6,
@@ -100,7 +120,11 @@
                 "stamina": 100,
                 "charisma": 90
             },
-            "comp_team": "闪电"
+            "comp_team": "闪电",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 7,
@@ -117,7 +141,11 @@
                 "stamina": 90,
                 "charisma": 85
             },
-            "comp_team": "沓星"
+            "comp_team": "沓星",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 8,
@@ -134,7 +162,11 @@
                 "stamina": 90,
                 "charisma": 90
             },
-            "comp_team": "沓星"
+            "comp_team": "沓星",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 9,
@@ -151,7 +183,11 @@
                 "stamina": 80,
                 "charisma": 85
             },
-            "comp_team": "疾风"
+            "comp_team": "疾风",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 10,
@@ -168,7 +204,11 @@
                 "stamina": 90,
                 "charisma": 85
             },
-            "comp_team": "沓星"
+            "comp_team": "沓星",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 11,
@@ -185,7 +225,11 @@
                 "stamina": 86,
                 "charisma": 85
             },
-            "comp_team": "闪电"
+            "comp_team": "闪电",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 12,
@@ -202,7 +246,11 @@
                 "stamina": 85,
                 "charisma": 85
             },
-            "comp_team": "悟空"
+            "comp_team": "悟空",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 13,
@@ -219,7 +267,11 @@
                 "stamina": 0,
                 "charisma": 100
             },
-            "comp_team": "硬朗"
+            "comp_team": "硬朗",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 14,
@@ -236,7 +288,11 @@
                 "stamina": 90,
                 "charisma": 85
             },
-            "comp_team": "悟空"
+            "comp_team": "悟空",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 15,
@@ -253,7 +309,11 @@
                 "stamina": 80,
                 "charisma": 85
             },
-            "comp_team": "悟空"
+            "comp_team": "悟空",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 16,
@@ -270,7 +330,11 @@
                 "stamina": 90,
                 "charisma": 75
             },
-            "comp_team": "稻香"
+            "comp_team": "稻香",
+            "height": "178",
+            "weight": "75",
+            "jersey_number": "10",
+            "years_played": "10"
         },
         {
             "id": 17,
@@ -287,7 +351,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "疾风"
+            "comp_team": "疾风",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 18,
@@ -304,7 +372,11 @@
                 "stamina": 99,
                 "charisma": 99
             },
-            "comp_team": "稻香"
+            "comp_team": "稻香",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 19,
@@ -321,7 +393,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "稻香"
+            "comp_team": "稻香",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 20,
@@ -338,7 +414,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "稻香"
+            "comp_team": "稻香",
+            "height": "178",
+            "weight": "75",
+            "jersey_number": "1",
+            "years_played": "15"
         },
         {
             "id": 21,
@@ -355,7 +435,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "悟空"
+            "comp_team": "悟空",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 22,
@@ -372,7 +456,11 @@
                 "stamina": 70,
                 "charisma": 100
             },
-            "comp_team": "闪电"
+            "comp_team": "闪电",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 23,
@@ -389,7 +477,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "疾风"
+            "comp_team": "疾风",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 24,
@@ -406,7 +498,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "疾风"
+            "comp_team": "疾风",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 25,
@@ -423,7 +519,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "闪电"
+            "comp_team": "闪电",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 26,
@@ -440,7 +540,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "沓星"
+            "comp_team": "沓星",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 27,
@@ -457,7 +561,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "稻香"
+            "comp_team": "稻香",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 28,
@@ -474,7 +582,11 @@
                 "stamina": 30,
                 "charisma": 100
             },
-            "comp_team": "疾风"
+            "comp_team": "疾风",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 29,
@@ -491,7 +603,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "疾风"
+            "comp_team": "疾风",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 30,
@@ -508,7 +624,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "硬朗"
+            "comp_team": "硬朗",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 31,
@@ -525,7 +645,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "沓星"
+            "comp_team": "沓星",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 32,
@@ -542,7 +666,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "硬朗"
+            "comp_team": "硬朗",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 33,
@@ -559,7 +687,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "硬朗"
+            "comp_team": "硬朗",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 34,
@@ -576,7 +708,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "沓星"
+            "comp_team": "沓星",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 35,
@@ -593,7 +729,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "悟空"
+            "comp_team": "悟空",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 36,
@@ -610,7 +750,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "闪电"
+            "comp_team": "闪电",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 37,
@@ -627,7 +771,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "硬朗"
+            "comp_team": "硬朗",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 38,
@@ -644,7 +792,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "闪电"
+            "comp_team": "闪电",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 39,
@@ -661,7 +813,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "稻香"
+            "comp_team": "稻香",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 40,
@@ -678,7 +834,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "悟空"
+            "comp_team": "悟空",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 41,
@@ -695,7 +855,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "闪电"
+            "comp_team": "闪电",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 42,
@@ -712,7 +876,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "疾风"
+            "comp_team": "疾风",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 43,
@@ -729,7 +897,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "沓星"
+            "comp_team": "沓星",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 44,
@@ -746,7 +918,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "悟空"
+            "comp_team": "悟空",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 45,
@@ -763,7 +939,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "闪电"
+            "comp_team": "闪电",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 46,
@@ -780,7 +960,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "疾风"
+            "comp_team": "疾风",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 47,
@@ -797,7 +981,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "沓星"
+            "comp_team": "沓星",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 48,
@@ -814,7 +1002,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "硬朗"
+            "comp_team": "硬朗",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 49,
@@ -831,7 +1023,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "稻香"
+            "comp_team": "稻香",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 50,
@@ -848,7 +1044,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "悟空"
+            "comp_team": "悟空",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         },
         {
             "id": 51,
@@ -865,7 +1065,11 @@
                 "stamina": 70,
                 "charisma": 75
             },
-            "comp_team": "闪电"
+            "comp_team": "闪电",
+            "height": 180,
+            "weight": 75,
+            "jersey_number": 1,
+            "years_played": 10
         }
     ]
 }

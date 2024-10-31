@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RCBA - 编辑个人信息</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <style>
+        /* 顶部导航栏 */
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar .logo span {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        /* 主体内容样式 */
+        .content {
+            width: 40%;
+            margin: 50px auto;
+            padding: 30px;
+            background: linear-gradient(145deg, #f3f4f6, #e9ecef);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+                /* 每行的标签和输入框水平对齐 */
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold; /* 设置加粗 */
+            font-family: 'Arial', sans-serif; /* 设置字体，可以更改为其他可用的字体 */
+        }
+
+        /* 统一输入框和选择框的宽度 */
+        input[type="number"], select {
+            width: 60%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        input[type="number"]:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+        }
+
+        button {
+            display: block;
+            width: 50%;
+            margin: 20px auto 0;
+            padding: 12px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航栏（无跳转入口） -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="../static/logo/logo.png" alt="RCBA Logo">
+{#            <span>编辑个人信息</span>#}
+        </div>
+    </div>
+
+    <!-- 编辑个人信息内容 -->
+    <div class="content">
+        <h2>{{ player.name }} 个人信息</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="height">身高(cm):</label>
+                <input type="number" name="height" min="0" max="300" value="{{ player.height }}">
+            </div>
+            <div class="form-group">
+                <label for="weight">体重(kg):</label>
+                <input type="number" name="weight" min="0" max="300" value="{{ player.weight }}">
+            </div>
+            <div class="form-group">
+                <label for="team_name">球队:</label>
+                <select name="team_name">
+                    {% for team in teams_info %}
+                        <option value="{{ team }}" {% if player.team_name == team %}selected{% endif %}>{{ team }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="jersey_number">球衣号:</label>
+                <input type="number" name="jersey_number" min="0" max="99" value="{{ player.jersey_number }}">
+            </div>
+            <div class="form-group">
+                <label for="years_played">球龄(年):</label>
+                <input type="number" name="years_played" min="1" max="99" value="{{ player.years_played }}">
+            </div>
+
+            <button type="submit">保存</button>
+        </form>
+    </div>
+
+</body>
+</html>
