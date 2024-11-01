@@ -63,8 +63,8 @@
                 "offense": 90,
                 "shooting": 85,
                 "speed": 80,
-                "stamina": 70,
-                "charisma": 75
+                "stamina": 80,
+                "charisma": 85
             },
             "comp_team": "稻香"
         },
