@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Basketball Players</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
     <style>
         .position {
             margin-bottom: 12px;
@@ -62,7 +62,9 @@
         {% endfor %}
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>-->
+    <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+
     <script>
         const players = {{ players | tojson }};
         players.forEach(player => {

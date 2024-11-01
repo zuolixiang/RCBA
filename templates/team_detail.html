@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ team_name }} - 阵容</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -85,11 +85,11 @@
             <tr>
                 <td><img src="{{ url_for('static', filename='avatar/' + player['avatar']) }}" alt="{{ player.name }} 头像" class="player-avatar"></td>
                 <td>{{ player.name }}</td>
-                <td> 180 cm</td>
-                <td> 80 kg</td>
+                <td>{{ player.height }} cm</td>
+                <td>{{ player.weight }} kg</td>
                 <td>{{ player.position }}</td>
-                <td> 6 年</td>
-                <td> 5 号</td>
+                <td>{{ player.jersey_number }} 号</td>
+                <td>{{ player.years_played }} 年</td>
             </tr>
             {% endfor %}
         </tbody>

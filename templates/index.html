@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>RCBA - 首页</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slick.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slick_theme.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
     <style>
         .carousel {
             width: 65%; /* 调整轮播图宽度 */
@@ -68,6 +71,7 @@
         <div class="navbar-right">
             {% if session.get('username') %}
                 <span> 用户: {{ session['username'] }}</span>
+                <button onclick="location.href='{{ url_for('rcbaplayer.profile') }}'">个人主页</button> <!-- 个人主页按钮 -->
                 <button onclick="location.href='{{ url_for('rcbaplayer.logout') }}'">退出</button>
             {% else %}
                 <button onclick="location.href='{{ url_for('rcbaplayer.login') }}'">登录</button>
@@ -91,8 +95,11 @@
     </div>
 
     <!-- 引入必要的 JavaScript 库 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>-->
+
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/slick.min.js') }}"></script>
     <script>
         $(document).ready(function(){
             $('.carousel').slick({

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RCBA - 个人主页</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <style>
+        /* 主体内容样式 */
+        .content {
+            width: 40%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .content h2 {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .info-item {
+            font-size: 1.2em;
+            line-height: 2em;
+            color: #555;
+        }
+
+        /* 按钮样式 */
+        .edit-btn {
+            display: block;
+            width: 100px;
+            padding: 10px;
+            margin: 20px auto;
+            text-align: center;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航栏 -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="../static/logo/logo.png" alt="RCBA Logo">
+            <span>RCBA</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('rcbaplayer.index') }}">首页</a></li>
+            <li><a href="{{ url_for('rcbaplayer.team') }}">球队</a></li>
+            <li><a href="{{ url_for('rcbaplayer.player') }}">球员</a></li>
+            <li><a href="#">数据</a>
+                <div class="dropdown">
+                    <a href="{{ url_for('rcbaplayer.add_data') }}">数据录入</a>
+                    <a href="{{ url_for('rcbaplayer.data_history') }}">历年赛况</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">赛程</a>
+                <div class="dropdown">
+                    <a href="{{ url_for('rcbaplayer.schedule', year=2024) }}">2024</a>
+                    <a href="{{ url_for('rcbaplayer.schedule', year=2025) }}">2025</a>
+                </div>
+            </li>
+        </ul>
+        <div class="navbar-right">
+            {% if session.get('username') %}
+                <span> 用户: {{ session['username'] }}</span>
+                <button onclick="location.href='{{ url_for('rcbaplayer.profile') }}'">个人主页</button>
+                <button onclick="location.href='{{ url_for('rcbaplayer.logout') }}'">退出</button>
+            {% else %}
+                <button onclick="location.href='{{ url_for('rcbaplayer.login') }}'">登录</button>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- 个人信息内容 -->
+    <div class="content">
+        <h2>个人信息</h2>
+        <p class="info-item">姓名: {{ player.name }}</p>
+        <p class="info-item">身高: {{ player.height }} cm</p>
+        <p class="info-item">体重: {{ player.weight }} kg</p>
+        <p class="info-item">团队: {{ player.team_name }}</p>
+        <p class="info-item">球衣号: {{ player.jersey_number }}</p>
+        <p class="info-item">球龄: {{ player.years_played }} 年</p>
+        <a href="{{ url_for('rcbaplayer.edit_profile') }}" class="edit-btn">编辑</a>
+    </div>
+
+</body>
+</html>
