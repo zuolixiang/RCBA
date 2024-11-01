@@ -420,6 +420,51 @@ def edit_profile():
     return render_template('edit_profile.html', player=player_info, teams_info=teams_info)
 
 
+@rcbaplayer.route('/data/leagueleader', methods=['GET', 'POST'])
+def league_leaders():
+    data = get_matches()
+    # 提取年份并按降序排序
+    years = sorted(list(data.keys()), reverse=True)
+
+    latest_year = years[0]
+    latest_data = stat_league_header(latest_year)
+    return render_template('leagueleaders.html', years=years, data=latest_data)
+
+
+def stat_league_header(year):
+    data = get_matches()
+    total_dict = {}  # 总得分
+    two_dict = {}  # 两分得分
+    three_dict = {}  # 三分得分
+    ft_dict = {}  # 罚球得分
+    if year in data.keys():
+        if data[year]['matches']:
+            for match in data[year]['matches']:
+                player_list = match['match_info']['players']
+                for player in player_list:
+                    if player['name'] == '女生投篮':
+                        continue
+                    total_dict[player['name']] = total_dict.get(player['name'], 0) + int(player['total_points'])
+                    two_dict[player['name']] = two_dict.get(player['name'], 0) + int(player['two_point_makes']) * 2
+                    three_dict[player['name']] = three_dict.get(player['name'], 0) + int(
+                        player['three_point_makes']) * 3
+                    ft_dict[player['name']] = ft_dict.get(player['name'], 0) + int(player['ft_makes'])
+
+    total_list = sorted([{'name': key, 'score': total_dict[key]} for key in total_dict.keys()],
+                        key=lambda x: x['score'], reverse=True)
+    two_list = sorted([{'name': key, 'score': two_dict[key]} for key in two_dict.keys()], key=lambda x: x['score'],
+                      reverse=True)
+    three_list = sorted([{'name': key, 'score': three_dict[key]} for key in three_dict.keys()],
+                        key=lambda x: x['score'], reverse=True)
+    ft_list = sorted([{'name': key, 'score': ft_dict[key]} for key in ft_dict.keys()], key=lambda x: x['score'],
+                     reverse=True)
+    top_data = [{'metric': '终极得分王', 'rankings': total_list},
+                {'metric': '超强中投王', 'rankings': two_list},
+                {'metric': '无敌三分王', 'rankings': three_list},
+                {'metric': '稳健罚球王', 'rankings': ft_list}]
+    return top_data
+
+
 # 登录页
 @rcbaplayer.route('/login', methods=['GET', 'POST'])
 def login():

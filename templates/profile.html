@@ -77,9 +77,12 @@
         </ul>
         <div class="navbar-right">
             {% if session.get('username') %}
-                <span> 用户: {{ session['username'] }}</span>
-                <button onclick="location.href='{{ url_for('rcbaplayer.profile') }}'">个人主页</button>
-                <button onclick="location.href='{{ url_for('rcbaplayer.logout') }}'">退出</button>
+                <div class="profile-container">
+                    <div class="profile-icon" onclick="location.href='{{ url_for('rcbaplayer.profile') }}'">
+                        {{ session['username'][-1] }}
+                    </div>
+                    <button onclick="location.href='{{ url_for('rcbaplayer.logout') }}'">退出</button>
+                </div>
             {% else %}
                 <button onclick="location.href='{{ url_for('rcbaplayer.login') }}'">登录</button>
             {% endif %}

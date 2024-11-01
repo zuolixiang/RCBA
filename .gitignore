@@ -6,3 +6,4 @@ __pycache__/
 TODO
 test
 .DS_Store
+*.md

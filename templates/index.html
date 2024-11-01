@@ -57,6 +57,7 @@
                 <div class="dropdown">
                     <a href="{{ url_for('rcbaplayer.add_data') }}">数据录入</a>
                     <a href="{{ url_for('rcbaplayer.data_history') }}">历年赛况</a>
+                    <a href="{{ url_for('rcbaplayer.league_leaders') }}">联盟数据王</a>
                 </div>
             </li>
             <li>
@@ -68,11 +69,15 @@
                 </div>
             </li>
         </ul>
+
         <div class="navbar-right">
             {% if session.get('username') %}
-                <span> 用户: {{ session['username'] }}</span>
-                <button onclick="location.href='{{ url_for('rcbaplayer.profile') }}'">个人主页</button> <!-- 个人主页按钮 -->
-                <button onclick="location.href='{{ url_for('rcbaplayer.logout') }}'">退出</button>
+                <div class="profile-container">
+                    <div class="profile-icon" onclick="location.href='{{ url_for('rcbaplayer.profile') }}'">
+                        {{ session['username'][-1] }}
+                    </div>
+                    <button onclick="location.href='{{ url_for('rcbaplayer.logout') }}'">退出</button>
+                </div>
             {% else %}
                 <button onclick="location.href='{{ url_for('rcbaplayer.login') }}'">登录</button>
             {% endif %}

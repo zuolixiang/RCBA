@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bar.css') }}">
+    <title>球员数据榜</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .card h3 {
+            font-size: 1.2em;
+            color: #007bff;
+        }
+        .player-image {
+            width: 100px;
+            height: auto;
+            border-radius: 50%;
+            margin: 15px 0;
+        }
+        .rank-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0;
+            text-align: left;
+        }
+        .rank-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .rank-list img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .view-more {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .season-select {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align: center; margin-top: 20px;">赛季联盟球员数据王</h2>
+
+    <!-- 赛季选择下拉菜单 -->
+    <div class="season-select">
+        <label for="season-select">选择赛季：</label>
+        <select id="season-select">
+            {% for year in years %}
+                <option value="{{ year }}" {% if year == years[0] %}selected{% endif %}>{{ year }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="container" id="data-container">
+        <!-- Example Card for 得分 -->
+        <div class="card">
+            <h3>终极得分王</h3>
+            <p>{{ data[0]['rankings'][0]['name'] }}</p>
+            <h2>{{ data[0]['rankings'][0]['score'] }}</h2>
+            <ul class="rank-list">
+                <li>{{ data[0]['rankings'][1]['name'] }} - {{ data[0]['rankings'][1]['score'] }}</li>
+                <li>{{ data[0]['rankings'][2]['name'] }} - {{ data[0]['rankings'][2]['score'] }}</li>
+                <li>{{ data[0]['rankings'][3]['name'] }} - {{ data[0]['rankings'][3]['score'] }}</li>
+                <li>{{ data[0]['rankings'][4]['name'] }} - {{ data[0]['rankings'][4]['score'] }}</li>
+                <li>{{ data[0]['rankings'][5]['name'] }} - {{ data[0]['rankings'][5]['score'] }}</li>
+                <li>{{ data[0]['rankings'][6]['name'] }} - {{ data[0]['rankings'][6]['score'] }}</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>超强中投王</h3>
+            <p>{{ data[1]['rankings'][0]['name'] }}</p>
+            <h2>{{ data[1]['rankings'][0]['score'] }}</h2>
+            <ul class="rank-list">
+                <li>{{ data[1]['rankings'][1]['name'] }} - {{ data[1]['rankings'][1]['score'] }}</li>
+                <li>{{ data[1]['rankings'][2]['name'] }} - {{ data[1]['rankings'][2]['score'] }}</li>
+                <li>{{ data[1]['rankings'][3]['name'] }} - {{ data[1]['rankings'][3]['score'] }}</li>
+                <li>{{ data[1]['rankings'][4]['name'] }} - {{ data[1]['rankings'][4]['score'] }}</li>
+                <li>{{ data[1]['rankings'][5]['name'] }} - {{ data[1]['rankings'][5]['score'] }}</li>
+                <li>{{ data[1]['rankings'][6]['name'] }} - {{ data[1]['rankings'][6]['score'] }}</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>无敌三分王</h3>
+            <img src="player_image.jpg" alt="Player Image" class="player-image">
+            <p>卡尔-安东尼唐斯</p>
+            <h2>44</h2>
+            <a href="#" class="view-more">查看更多数据 ></a>
+            <ul class="rank-list">
+                <li><img src="player2.jpg" alt="Player 2"> 杰森·塔图姆 - 37</li>
+                <li><img src="player3.jpg" alt="Player 3"> 特雷·杨 - 35</li>
+                <li><img src="player4.jpg" alt="Player 4"> 泰勒·希罗 - 34</li>
+                <li><img src="player5.jpg" alt="Player 5"> 丹尼斯·施罗德 - 33</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>稳健罚球王</h3>
+            <img src="player_image.jpg" alt="Player Image" class="player-image">
+            <p>卡尔-安东尼唐斯</p>
+            <h2>44</h2>
+            <a href="#" class="view-more">查看更多数据 ></a>
+            <ul class="rank-list">
+                <li><img src="player2.jpg" alt="Player 2"> 杰森·塔图姆 - 37</li>
+                <li><img src="player3.jpg" alt="Player 3"> 特雷·杨 - 35</li>
+                <li><img src="player4.jpg" alt="Player 4"> 泰勒·希罗 - 34</li>
+                <li><img src="player5.jpg" alt="Player 5"> 丹尼斯·施罗德 - 33</li>
+            </ul>
+        </div>
+
+        <!-- Repeat similar cards for other metrics -->
+    </div>
+
+    <script>
+        document.getElementById('season-select').addEventListener('change', function () {
+            const selectedYear = this.value;
+            fetch(`/stat_league_header/${selectedYear}`)
+                .then(response => response.json())
+                .then(data => {
+                    // 更新页面显示的数据
+                    updateDataDisplay(data);
+                });
+        });
+
+        function updateDataDisplay(data) {
+            const container = document.getElementById('data-container');
+            container.innerHTML = ''; // 清空当前内容
+
+            data.forEach(player => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>${player.metric}</h3>
+                    <img src="#" alt="Player Image" class="player-image">
+                    <p>${player.name}</p>
+                    <h2>${player.score}</h2>
+                    <a href="#" class="view-more">查看更多数据 ></a>
+                    <ul class="rank-list">
+                        ${player.rankings.map(rank => `<li><img src="#" alt="${rank.name}"> ${rank.name} - ${rank.score}</li>`).join('')}
+                    </ul>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+
+</body>
+</html>
