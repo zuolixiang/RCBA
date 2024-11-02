@@ -11,6 +11,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/slick_theme.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
     <style>
+        /* 设置下拉菜单样式 */
+        .nav-links .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            z-index: 15; /* 提高下拉菜单的层级 */
+        }
         .carousel {
             width: 65%; /* 调整轮播图宽度 */
             margin: 0 auto; /* 居中对齐 */

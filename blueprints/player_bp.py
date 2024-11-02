@@ -8,36 +8,10 @@
 """
 
 from flask import render_template, request, redirect, url_for, session, Blueprint, jsonify
-import json
-import os
+from util.player_tools import *
 
 # 注册蓝图
 rcbaplayer = Blueprint('rcbaplayer', __name__, template_folder='templates')
-
-
-current_file_path = os.path.dirname(os.path.abspath(__file__))
-
-
-# 读取球员数据
-def load_json_data(filename, key):
-    with open(filename, 'r') as file:
-        return json.load(file)[key]
-
-
-# 保存球员数据
-def save_players(players):
-    with open(current_file_path + '/../data/players.json', 'w', encoding='utf8') as file:
-        json.dump({"players": players}, file, indent=4, ensure_ascii=False)
-
-
-players_json = current_file_path + '/../data/players.json'
-teams_json = current_file_path + '/../data/teams.json'
-match_json = current_file_path + '/../data/match_statistics.json'
-
-players = load_json_data(players_json, 'players')
-teams = load_json_data(teams_json, 'teams')
-comp_teams_2024 = load_json_data(teams_json, 'comp_teams_2024')
-# matches = load_json_data(match_json, 'years')
 
 
 # 首页
@@ -109,7 +83,6 @@ def player_show(player_id):
 
     if request.method == 'POST':
         if session.get('is_admin', False) or session['username'] == player['name']:
-            print(request.form)
             try:
                 position = request.form['position']
                 # pos_neg = request.form['pos_neg']
@@ -248,11 +221,8 @@ def save_match():
 
 
 # 获取比赛统计数据
-@rcbaplayer.route('/data/matches')
-def get_matches():
-    with open(match_json, 'r') as file:
-        matches = json.load(file)
-        return matches
+# @rcbaplayer.route('/data/matches')
+
 
 
 # 录入球员比赛信息数据
@@ -359,15 +329,6 @@ def data_history():
     return render_template('show_comp_info.html', match_dates=data)
 
 
-def get_match_rounds_by_date(match_year):
-    data = get_matches()
-    match_rounds = []
-    if match_year in data:
-        for match in data[match_year]['matches']:
-            match_rounds.append(match['match_id'])
-    return match_rounds
-
-
 @rcbaplayer.route('/get_match_rounds', methods=['POST'])
 def get_match_rounds():
     match_year = request.form['match_year']
@@ -402,7 +363,6 @@ def profile():
 def edit_profile():
     username = session.get('username')
     player_info = next((player for player in players if player['name'] == username), None)
-    print(player_info)
     if not player_info:
         return "你不是现役球员，无法编辑信息"
 
@@ -431,12 +391,14 @@ def league_leaders():
     return render_template('leagueleaders.html', years=years, data=latest_data)
 
 
+@rcbaplayer.route('/data/stat_league_header/<year>', methods=['GET', 'POST'])
 def stat_league_header(year):
     data = get_matches()
     total_dict = {}  # 总得分
     two_dict = {}  # 两分得分
     three_dict = {}  # 三分得分
     ft_dict = {}  # 罚球得分
+
     if year in data.keys():
         if data[year]['matches']:
             for match in data[year]['matches']:
@@ -445,23 +407,20 @@ def stat_league_header(year):
                     if player['name'] == '女生投篮':
                         continue
                     total_dict[player['name']] = total_dict.get(player['name'], 0) + int(player['total_points'])
-                    two_dict[player['name']] = two_dict.get(player['name'], 0) + int(player['two_point_makes']) * 2
+                    two_dict[player['name']] = two_dict.get(player['name'], 0) + int(player['two_point_makes'])
                     three_dict[player['name']] = three_dict.get(player['name'], 0) + int(
-                        player['three_point_makes']) * 3
+                        player['three_point_makes'])
                     ft_dict[player['name']] = ft_dict.get(player['name'], 0) + int(player['ft_makes'])
 
-    total_list = sorted([{'name': key, 'score': total_dict[key]} for key in total_dict.keys()],
-                        key=lambda x: x['score'], reverse=True)
-    two_list = sorted([{'name': key, 'score': two_dict[key]} for key in two_dict.keys()], key=lambda x: x['score'],
-                      reverse=True)
-    three_list = sorted([{'name': key, 'score': three_dict[key]} for key in three_dict.keys()],
-                        key=lambda x: x['score'], reverse=True)
-    ft_list = sorted([{'name': key, 'score': ft_dict[key]} for key in ft_dict.keys()], key=lambda x: x['score'],
-                     reverse=True)
-    top_data = [{'metric': '终极得分王', 'rankings': total_list},
-                {'metric': '超强中投王', 'rankings': two_list},
-                {'metric': '无敌三分王', 'rankings': three_list},
-                {'metric': '稳健罚球王', 'rankings': ft_list}]
+    total_list = sort_list(total_dict)
+    two_list = sort_list(two_dict)
+    three_list = sort_list(three_dict)
+    ft_list = sort_list(ft_dict)
+
+    top_data = [{'metric': '终极得分王','rankings': total_list[1:10], 'name': total_list[0]['name'], 'score': total_list[0]['score']},
+                {'metric': '超强中投王','rankings': two_list[1:10], 'name': two_list[0]['name'], 'score': two_list[0]['score']},
+                {'metric': '无敌三分王','rankings': three_list[1:10], 'name': three_list[0]['name'], 'score': three_list[0]['score']},
+                {'metric': '稳健罚球王','rankings': ft_list[1:10], 'name': ft_list[0]['name'], 'score': ft_list[0]['score']}]
     return top_data
 
 

@@ -10,14 +10,14 @@ body {
     font-family: 'Oswald', sans-serif;
     background-color: #f4f4f4;
     color: #333;
-    padding: calc(85px + 20px) 20px 0 20px;
+    padding: calc(85px + 50px) 20px 0 20px;
 }
 /* 顶部导航栏样式 */
 .navbar {
     display: flex;
     align-items: center;
     background-color: #007bff;
-    padding: 10px 20px;
+    padding: 10px 30px;
     color: white;
     left: 0;
     top: 0;
@@ -157,6 +157,7 @@ body {
 
 .promo-banner {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 /*.nav-links {*/

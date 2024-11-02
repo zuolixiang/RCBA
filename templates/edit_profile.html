@@ -16,20 +16,19 @@
             font-family: Arial, sans-serif;
         }
 
-        .navbar .logo span {
-            font-size: 1.2em;
-            font-weight: bold;
+        /* 主体内容样式 */
+        body {
+            background-color: #f3f4f6;
+            font-family: Arial, sans-serif;
         }
 
-        /* 主体内容样式 */
         .content {
-            width: 40%;
+            width: 30%;
             margin: 50px auto;
             padding: 30px;
-            background: linear-gradient(145deg, #f3f4f6, #e9ecef);
+            background: #ffffff;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-            font-family: Arial, sans-serif;
             color: #333;
         }
 
@@ -42,56 +41,80 @@
             padding-bottom: 10px;
         }
 
-                /* 每行的标签和输入框水平对齐 */
+        /* 表单样式 */
         .form-group {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
+            font-size: 1.1em;
         }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold; /* 设置加粗 */
-            font-family: 'Arial', sans-serif; /* 设置字体，可以更改为其他可用的字体 */
+        .form-group label {
+            width: 35%; /* 控制标签宽度 */
+            font-weight: bold;
+            color: #555;
+            text-align: left;
+            padding-left: 10px; /* 标签左侧间距 */
         }
 
-        /* 统一输入框和选择框的宽度 */
+        /* 输入框和选择框样式 */
         input[type="number"], select {
-            width: 60%;
-            padding: 12px;
-            margin-bottom: 20px;
+            width: 90%;
+            padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1em;
-            transition: all 0.3s ease;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+            box-sizing: border-box;
+        }
+
+        /* 父容器宽度设置 */
+        .form-group div {
+            width: 65%;
+            margin-left: 10px; /* 输入框容器的左侧间距 */
         }
 
         input[type="number"]:focus, select:focus {
             border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
             outline: none;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
         }
 
+        /* 保存按钮样式 */
         button {
             display: block;
-            width: 50%;
-            margin: 20px auto 0;
-            padding: 12px;
-            font-size: 1em;
+            width: 40%;
+            padding: 10px;
+            margin: 20px auto;
+            font-size: 1.1em;
             color: #fff;
             background-color: #007bff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s;
         }
 
         button:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .content {
+                width: 70%;
+            }
+
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-group label, .form-group div {
+                width: 100%;
+                text-align: left;
+                padding-left: 0;
+            }
         }
     </style>
 </head>
@@ -100,8 +123,7 @@
     <!-- 顶部导航栏（无跳转入口） -->
     <div class="navbar">
         <div class="logo">
-            <img src="../static/logo/logo.png" alt="RCBA Logo">
-{#            <span>编辑个人信息</span>#}
+            <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="RCBA Logo">
         </div>
     </div>
 
@@ -111,27 +133,37 @@
         <form method="POST">
             <div class="form-group">
                 <label for="height">身高(cm):</label>
-                <input type="number" name="height" min="0" max="300" value="{{ player.height }}">
+                <div>
+                    <input type="number" name="height" min="0" max="300" value="{{ player.height }}">
+                </div>
             </div>
             <div class="form-group">
                 <label for="weight">体重(kg):</label>
-                <input type="number" name="weight" min="0" max="300" value="{{ player.weight }}">
+                <div>
+                    <input type="number" name="weight" min="0" max="300" value="{{ player.weight }}">
+                </div>
             </div>
             <div class="form-group">
                 <label for="team_name">球队:</label>
-                <select name="team_name">
-                    {% for team in teams_info %}
-                        <option value="{{ team }}" {% if player.team_name == team %}selected{% endif %}>{{ team }}</option>
-                    {% endfor %}
-                </select>
+                <div>
+                    <select name="team_name">
+                        {% for team in teams_info %}
+                            <option value="{{ team }}" {% if player.team_name == team %}selected{% endif %}>{{ team }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
             <div class="form-group">
                 <label for="jersey_number">球衣号:</label>
-                <input type="number" name="jersey_number" min="0" max="99" value="{{ player.jersey_number }}">
+                <div>
+                    <input type="number" name="jersey_number" min="0" max="99" value="{{ player.jersey_number }}">
+                </div>
             </div>
             <div class="form-group">
                 <label for="years_played">球龄(年):</label>
-                <input type="number" name="years_played" min="1" max="99" value="{{ player.years_played }}">
+                <div>
+                    <input type="number" name="years_played" min="1" max="99" value="{{ player.years_played }}">
+                </div>
             </div>
 
             <button type="submit">保存</button>

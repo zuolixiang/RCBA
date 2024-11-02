@@ -51,13 +51,13 @@
     <div class="player-container">
         {% for player in players %}
         <div class="player-card">
-            <img src="{{ url_for('static', filename='avatar/' + player['avatar']) }}" alt="头像" width="150">
+            <img src="{{ url_for('static', filename='avatar/' + player.name + '.png') }}" alt="头像" width="150">
             <h3>{{ player.name }}</h3>
-            <p class="position">Position: {{ player.position }}</p>
+            <p class="position">位置: {{ player.position }}</p>
             <p class="metric">湖力值: {{ player.skills.defense*0.2 + player.skills.offense*0.15 + player.skills.shooting*0.15 + player.skills.speed*0.1
                 + player.skills.stamina*0.15 + player.skills.charisma * 0.25 }} </p>
             <canvas id="radarChart{{ player.id }}" width="200" height="200"></canvas>
-            <button onclick="location.href='{{ url_for('rcbaplayer.player_show', player_id=player.id) }}'">View Details</button>
+            <button onclick="location.href='{{ url_for('rcbaplayer.player_show', player_id=player.id) }}'">查看详细数据</button>
         </div>
         {% endfor %}
     </div>

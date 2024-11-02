@@ -75,7 +75,7 @@
 <body>
     <div class="container">
         <h2>{{ player.name }} - Details</h2>
-        <img src="{{ url_for('static', filename='avatar/' + player['avatar']) }}" alt="头像" width="150">
+        <img src="{{ url_for('static', filename='avatar/' + player.name + '.png') }}" alt="头像" width="150">
     {#    <img src="{{ player.avatar }}" alt="Avatar">#}
 {#        <p>位置: {{ player.position }}</p>#}
         <form method="POST">
