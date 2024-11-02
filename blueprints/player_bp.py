@@ -387,12 +387,12 @@ def league_leaders():
     years = sorted(list(data.keys()), reverse=True)
 
     latest_year = years[0]
-    latest_data = stat_league_header(latest_year)
-    return render_template('leagueleaders.html', years=years, data=latest_data)
+    latest_data = stat_league_header(latest_year, as_json=False)
+    return render_template('leagueleaders.html', years=years, data=latest_data['data'])
 
 
 @rcbaplayer.route('/data/stat_league_header/<year>', methods=['GET', 'POST'])
-def stat_league_header(year):
+def stat_league_header(year, as_json=True):
     data = get_matches()
     total_dict = {}  # 总得分
     two_dict = {}  # 两分得分
@@ -421,7 +421,11 @@ def stat_league_header(year):
                 {'metric': '超强中投王','rankings': two_list[1:10], 'name': two_list[0]['name'], 'score': two_list[0]['score']},
                 {'metric': '无敌三分王','rankings': three_list[1:10], 'name': three_list[0]['name'], 'score': three_list[0]['score']},
                 {'metric': '稳健罚球王','rankings': ft_list[1:10], 'name': ft_list[0]['name'], 'score': ft_list[0]['score']}]
-    return top_data
+
+    if as_json:
+        return jsonify({'data': top_data})
+    else:
+        return {'data': top_data}
 
 
 # 登录页

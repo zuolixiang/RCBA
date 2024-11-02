@@ -146,6 +146,7 @@
                         </div>
                         <div class="aside">
                             <!-- 右侧头像部分 -->
+{#                            <img src="'/static/avatar/+ {{ data[0]['name'] }} + '.png'" alt="Player Image" class="player-image">#}
                             <img src="{{ url_for('static', filename='avatar/'+data[0]['name']+'.png') }}" alt="Player Image" class="player-image">
                         </div>
                     </div>
@@ -241,7 +242,7 @@
                 const container = document.getElementById('data-container');
                 container.innerHTML = ''; // 清空当前内容
 
-                data.forEach(player => {
+                data.data.forEach(player => {
                     const card = document.createElement('div');
                     card.className = 'card';
                     card.innerHTML = `
