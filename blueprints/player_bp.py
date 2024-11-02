@@ -9,10 +9,36 @@
 
 from flask import render_template, request, redirect, url_for, session, Blueprint, jsonify
 from util.player_tools import *
+import os
+import json
 
 # 注册蓝图
 rcbaplayer = Blueprint('rcbaplayer', __name__, template_folder='templates')
 
+
+
+current_file_path = os.path.dirname(os.path.abspath(__file__))
+
+players_json = current_file_path + '/../data/players.json'
+teams_json = current_file_path + '/../data/teams.json'
+match_json = current_file_path + '/../data/match_statistics.json'
+
+# 读取球员数据
+def load_json_data(filename, key):
+    with open(filename, 'r') as file:
+        return json.load(file)[key]
+
+
+# 保存球员数据
+def save_players(players):
+    with open(current_file_path + '/../data/players.json', 'w', encoding='utf8') as file:
+        json.dump({"players": players}, file, indent=4, ensure_ascii=False)
+
+
+players = load_json_data(players_json, 'players')
+teams = load_json_data(teams_json, 'teams')
+comp_teams_2024 = load_json_data(teams_json, 'comp_teams_2024')
+# matches = load_json_data(match_json, 'years')
 
 # 首页
 @rcbaplayer.route('/')
@@ -322,6 +348,22 @@ def filter_data():
         'guest_girl_ft': guest_girl_ft,
     })
 
+# 获取比赛数据
+@rcbaplayer.route('/data/matches')
+def get_matches():
+    with open(match_json, 'r') as file:
+        matches = json.load(file)
+        return matches
+
+
+# 获取比赛轮次
+def get_match_rounds_by_date(match_year):
+    data = get_matches()
+    match_rounds = []
+    if match_year in data:
+        for match in data[match_year]['matches']:
+            match_rounds.append(match['match_id'])
+    return match_rounds
 
 @rcbaplayer.route('/data/history', methods=['GET', 'POST'])
 def data_history():
