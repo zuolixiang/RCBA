@@ -37,10 +37,10 @@
                 "charisma": 81
             },
             "comp_team": "悟空",
-            "height": 180,
-            "weight": 75,
-            "jersey_number": 1,
-            "years_played": 10
+            "height": "175",
+            "weight": "72",
+            "jersey_number": "21",
+            "years_played": "12"
         },
         {
             "id": 3,
