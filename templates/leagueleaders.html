@@ -138,7 +138,7 @@
             <!-- 示例卡片 -->
             <div class="card">
                 <div class="card-content">
-                    <h3 class="card-content-title">终极得分王</h3>
+                    <h3 class="card-content-title">得分</h3>
                     <div class="card-content-body">
                         <div class="main">
                             <p>{{ data[0]['name'] }}</p>
@@ -162,7 +162,7 @@
             <!-- 其他数据王卡片 -->
             <div class="card">
                 <div class="card-content">
-                    <h3 class="card-content-title">超强中投王</h3>
+                    <h3 class="card-content-title">两分命中率</h3>
                     <div class="card-content-body">
                         <div class="main">
                             <p>{{ data[1]['name'] }}</p>
@@ -184,7 +184,7 @@
 
             <div class="card">
                 <div class="card-content">
-                    <h3 class="card-content-title">无敌三分王</h3>
+                    <h3 class="card-content-title">三分命中数</h3>
                     <div class="card-content-body">
                         <div class="main">
                             <p>{{ data[2]['name'] }}</p>
@@ -205,7 +205,7 @@
 
             <div class="card">
                 <div class="card-content">
-                    <h3 class="card-content-title">稳健罚球王</h3>
+                    <h3 class="card-content-title">三分命中率</h3>
                     <div class="card-content-body">
                         <div class="main">
                             <p>{{ data[3]['name'] }}</p>
@@ -220,6 +220,50 @@
 
                 <ul class="rank-list">
                     {% for rank in data[3]['rankings'] %}
+                        <li><span>{{ rank['index'] }}. {{ rank['name'] }}</span><span>{{ rank['score'] }}</span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h3 class="card-content-title">罚球命中数</h3>
+                    <div class="card-content-body">
+                        <div class="main">
+                            <p>{{ data[4]['name'] }}</p>
+                            <h2>{{ data[4]['score'] }}</h2>
+                        </div>
+                        <div class="aside">
+                            <!-- 右侧头像部分 -->
+                            <img src="{{ url_for('static', filename='avatar/'+data[4]['name']+'.png') }}" alt="Player Image" class="player-image">
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="rank-list">
+                    {% for rank in data[4]['rankings'] %}
+                        <li><span>{{ rank['index'] }}. {{ rank['name'] }}</span><span>{{ rank['score'] }}</span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h3 class="card-content-title">罚球命中率</h3>
+                    <div class="card-content-body">
+                        <div class="main">
+                            <p>{{ data[5]['name'] }}</p>
+                            <h2>{{ data[5]['score'] }}</h2>
+                        </div>
+                        <div class="aside">
+                            <!-- 右侧头像部分 -->
+                            <img src="{{ url_for('static', filename='avatar/'+data[5]['name']+'.png') }}" alt="Player Image" class="player-image">
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="rank-list">
+                    {% for rank in data[5]['rankings'] %}
                         <li><span>{{ rank['index'] }}. {{ rank['name'] }}</span><span>{{ rank['score'] }}</span></li>
                     {% endfor %}
                 </ul>
