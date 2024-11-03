@@ -203,7 +203,7 @@
         </form>
     </div>
 
-    <script "{{ url_for('static', filename='js/cropper.min.js' ) }}"></script>
+    <script src="{{ url_for('static', filename='js/cropper.min.js' ) }}"></script>
     <script>
         document.getElementById('avatar').addEventListener('change', function(event) {
             const file = event.target.files[0];
