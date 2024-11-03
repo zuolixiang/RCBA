@@ -501,6 +501,19 @@ def stat_league_header(year, as_json=True):
         return {'data': top_data}
 
 
+# 更新头像
+@rcbaplayer.route('/upload_avatar', methods=['POST'])
+def upload_avatar():
+    avatar = request.files.get('avatar')
+    if avatar:
+        player_name = request.form.get('name')
+        filename = f"{player_name}.png"
+        save_path = os.path.join('static', 'avatar', filename)
+        avatar.save(save_path)
+        return jsonify({"success": True})
+    return jsonify({"success": False})
+
+
 # 登录页
 @rcbaplayer.route('/login', methods=['GET', 'POST'])
 def login():

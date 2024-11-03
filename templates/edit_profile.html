@@ -5,6 +5,7 @@
     <title>RCBA - 编辑个人信息</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cropper.min.css') }}">
     <style>
         /* 顶部导航栏 */
         .navbar {
@@ -116,6 +117,18 @@
                 padding-left: 0;
             }
         }
+
+        /* 裁剪区域样式 */
+        #crop-container {
+            display: none;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        #image-preview {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -130,7 +143,27 @@
     <!-- 编辑个人信息内容 -->
     <div class="content">
         <h2>{{ player.name }} 个人信息</h2>
+
+        <!-- 当前头像显示 -->
+        <div class="form-group">
+            <label>当前头像:</label>
+            <img id="current-avatar" src="{{ url_for('static', filename='avatar/' + player.name + '.png') }}" alt="头像" style="width: 100px; height: 100px;">
+        </div>
+
+        <!-- 头像上传和裁剪 -->
+        <div class="form-group">
+            <label for="avatar">上传新头像:</label>
+            <input type="file" id="avatar" accept="image/*">
+        </div>
+
+        <!-- 裁剪区域 -->
+        <div id="crop-container">
+            <img id="image-preview" src="">
+            <button id="crop-button" type="button">裁剪并上传</button>
+        </div>
+
         <form method="POST">
+            <!-- 其他表单字段 -->
             <div class="form-group">
                 <label for="height">身高(cm):</label>
                 <div>
@@ -169,6 +202,54 @@
             <button type="submit">保存</button>
         </form>
     </div>
+
+    <script "{{ url_for('static', filename='js/cropper.min.js' ) }}"></script>
+    <script>
+        document.getElementById('avatar').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('image-preview');
+                    img.src = e.target.result;
+                    document.getElementById('crop-container').style.display = 'block';
+
+                    const cropper = new Cropper(img, {
+                        aspectRatio: 1,
+                        viewMode: 2,
+                    });
+
+                    document.getElementById('crop-button').addEventListener('click', function() {
+                        const canvas = cropper.getCroppedCanvas({
+                            width: 100,
+                            height: 100,
+                        });
+
+                        canvas.toBlob(function(blob) {
+                            const formData = new FormData();
+                            formData.append('avatar', blob, "{{ player.name }}.png");
+                            formData.append('name', "{{ player.name }}"); // 添加当前用户名参数
+
+                            // 将裁剪后的头像上传到后端
+                            fetch('/upload_avatar', {
+                                method: 'POST',
+                                body: formData,
+                            }).then(response => response.json())
+                              .then(data => {
+                                  if (data.success) {
+                                      alert('头像已上传！');
+                                      document.getElementById('current-avatar').src = URL.createObjectURL(blob);
+                                  } else {
+                                      alert('头像上传失败，请重试。');
+                                  }
+                              });
+                        });
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 
 </body>
 </html>

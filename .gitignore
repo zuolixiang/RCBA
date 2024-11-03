@@ -6,3 +6,4 @@ TODO
 test
 .DS_Store
 *.md
+start_with_watchdog.sh
