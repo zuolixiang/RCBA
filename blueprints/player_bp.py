@@ -11,6 +11,7 @@ from flask import render_template, request, redirect, url_for, session, Blueprin
 from util.player_tools import *
 import os
 import json
+from collections import defaultdict
 
 # 注册蓝图
 rcbaplayer = Blueprint('rcbaplayer', __name__, template_folder='templates')
@@ -436,10 +437,16 @@ def league_leaders():
 @rcbaplayer.route('/data/stat_league_header/<year>', methods=['GET', 'POST'])
 def stat_league_header(year, as_json=True):
     data = get_matches()
-    total_dict = {}  # 总得分
-    two_dict = {}  # 两分得分
-    three_dict = {}  # 三分得分
-    ft_dict = {}  # 罚球得分
+    total_dict = {}
+    two_dict_tmp = defaultdict(lambda: [0, 0])  # 两分球统计
+    two_dict = {}  # 两分命中数
+    two_rate_dict = {}    # 两分命中率
+    three_dict_tmp = defaultdict(lambda: [0, 0])  # 三分球统计
+    three_dict = {}  # 三分命中数
+    three_rate_dict = {} # 三分命中率
+    ft_dict_tmp = defaultdict(lambda: [0, 0]) # 罚球统计
+    ft_dict = {}  # 罚球命中数
+    ft_rate_dict = {} # 罚球命中率
 
     if year in data.keys():
         if data[year]['matches']:
@@ -449,20 +456,44 @@ def stat_league_header(year, as_json=True):
                     if player['name'] == '女生投篮':
                         continue
                     total_dict[player['name']] = total_dict.get(player['name'], 0) + int(player['total_points'])
-                    two_dict[player['name']] = two_dict.get(player['name'], 0) + int(player['two_point_makes'])
-                    three_dict[player['name']] = three_dict.get(player['name'], 0) + int(
-                        player['three_point_makes'])
-                    ft_dict[player['name']] = ft_dict.get(player['name'], 0) + int(player['ft_makes'])
+                    two_dict_tmp[player['name']][0] = + int(player['two_point_attempts'])
+                    two_dict_tmp[player['name']][1] = + int(player['two_point_makes'])
+                    three_dict_tmp[player['name']][0] = + int(player['three_point_attempts'])
+                    three_dict_tmp[player['name']][1] = + int(player['three_point_makes'])
+                    ft_dict_tmp[player['name']][0] = + int(player['ft_attempts'])
+                    ft_dict_tmp[player['name']][1] = + int(player['ft_makes'])
+            for k in two_dict_tmp:
+                two_dict[k] = two_dict_tmp[k][1]
 
-    total_list = sort_list(total_dict)
-    two_list = sort_list(two_dict)
-    three_list = sort_list(three_dict)
-    ft_list = sort_list(ft_dict)
+            for k in three_dict_tmp:
+                three_dict[k] = three_dict_tmp[k][1]
 
-    top_data = [{'metric': '终极得分王','rankings': total_list[1:10], 'name': total_list[0]['name'], 'score': total_list[0]['score']},
-                {'metric': '超强中投王','rankings': two_list[1:10], 'name': two_list[0]['name'], 'score': two_list[0]['score']},
-                {'metric': '无敌三分王','rankings': three_list[1:10], 'name': three_list[0]['name'], 'score': three_list[0]['score']},
-                {'metric': '稳健罚球王','rankings': ft_list[1:10], 'name': ft_list[0]['name'], 'score': ft_list[0]['score']}]
+            for k in ft_dict_tmp:
+                ft_dict[k] = ft_dict_tmp[k][1]
+
+            two_rate_dict = format_dict(two_dict_tmp, two_rate_dict)
+            three_rate_dict = format_dict(three_dict_tmp, three_rate_dict)
+            ft_rate_dict = format_dict(ft_dict_tmp, ft_rate_dict)
+
+            total_list = sort_list(total_dict, False)
+            two_rate_list = sort_list(two_rate_dict, True)
+            three_list = sort_list(three_dict, False)
+            three_rate_list = sort_list(three_rate_dict, True)
+            ft_list = sort_list(ft_dict, False)
+            ft_rate_list = sort_list(ft_rate_dict, True)
+
+            top_data = [{'metric': '得分', 'rankings': total_list[1:10], 'name': total_list[0]['name'],
+                         'score': total_list[0]['score']},
+                        {'metric': '两分命中率', 'rankings': two_rate_list[1:10], 'name': two_rate_list[0]['name'],
+                         'score': two_rate_list[0]['score']},
+                        {'metric': '三分命中数', 'rankings': three_list[1:10], 'name': three_list[0]['name'],
+                         'score': three_list[0]['score']},
+                        {'metric': '三分命中率', 'rankings': three_rate_list[1:10], 'name': three_rate_list[0]['name'],
+                         'score': three_rate_list[0]['score']},
+                        {'metric': '罚球命中数', 'rankings': ft_list[1:10], 'name': ft_list[0]['name'],
+                         'score': ft_list[0]['score']},
+                        {'metric': '罚球命中率', 'rankings': ft_rate_list[1:10], 'name': ft_rate_list[0]['name'],
+                         'score': ft_rate_list[0]['score']}]
 
     if as_json:
         return jsonify({'data': top_data})
