@@ -75,7 +75,7 @@
 
     <!-- 队长部分 -->
     <div class="captain">
-        <img src="{{ url_for('static', filename='avatar/' + team.captain_avatar) }}" alt="{{ team.captain }}">
+        <img src="{{ url_for('static', filename='avatar/' + team.captain + '.png') }}" alt="{{ team.captain }}">
         <h2>队长: {{ team.captain }}</h2>
     </div>
 
@@ -84,7 +84,7 @@
         {% for player in players %}
             {% if player.name != team.captain %}
                 <div class="player">
-                    <img src="{{ url_for('static', filename='avatar/' + player.avatar) }}" alt="{{ player.name }}">
+                    <img src="{{ url_for('static', filename='avatar/' + player.name + '.png') }}" alt="{{ player.name }}">
                     <p>{{ player.position }}: {{ player.name }}</p>
                 </div>
             {% endif %}
