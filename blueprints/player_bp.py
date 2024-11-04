@@ -11,7 +11,7 @@ from flask import render_template, request, redirect, url_for, session, Blueprin
 from util.player_tools import *
 import os
 import json
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 
 # 注册蓝图
 rcbaplayer = Blueprint('rcbaplayer', __name__, template_folder='templates')
@@ -354,7 +354,8 @@ def filter_data():
 def get_matches():
     with open(match_json, 'r') as file:
         matches = json.load(file)
-        return matches
+        sorted_matches = OrderedDict(sorted(matches.items(), key=lambda x: x[0], reverse=True))
+        return sorted_matches
 
 
 # 获取比赛轮次
