@@ -80,25 +80,53 @@
             outline: none;
         }
 
-        /* 保存按钮样式 */
-        button {
-            display: block;
-            width: 40%;
+        /* 按钮组样式 */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* 按钮之间的间距 */
+            margin-top: 20px;
             padding: 10px;
-            margin: 20px auto;
-            font-size: 1.1em;
+        }
+
+        /* 统一按钮样式 */
+        .action-button {
+            display: inline-block; /* 保证两个按钮一致的宽度表现 */
+            width: 120px; /* 按钮宽度 */
+            height: 30px;
+            {#padding: 10px; /* 按钮内边距 */#}
+            font-size: 1em;
+            text-align: center;
             color: #fff;
-            background-color: #007bff;
+            text-decoration: none; /* 去掉链接下划线 */
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s;
         }
 
-        button:hover {
+        /* 保存按钮 */
+        .action-button[type="submit"] {
+            background-color: #007bff;
+        }
+
+        .action-button[type="submit"]:hover {
             background-color: #0056b3;
             transform: scale(1.05);
         }
+
+        /* 返回按钮 */
+        .back-button {
+            width: 120px;
+            background-color: #6c757d;
+        }
+
+        .back-button:hover {
+            background-color: #5a6268;
+            transform: scale(1.05);
+        }
+
+
 
         /* 响应式设计 */
         @media (max-width: 768px) {
@@ -199,7 +227,14 @@
                 </div>
             </div>
 
-            <button type="submit">保存</button>
+            <div class="button-group">
+                <button type="submit" class="action-button">保存</button>
+                <button class="action-button back-button" onclick="location.href='{{ url_for('rcbaplayer.profile') }}'">返回</button>
+{#                <a href="/profile" class="action-button back-button">返回</a>#}
+            </div>
+
+
+
         </form>
     </div>
 
