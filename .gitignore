@@ -2,8 +2,6 @@
 .idea
 __pycache__/
 */__pycache__/
-TODO
 test
 .DS_Store
 *.md
-start_with_watchdog.sh

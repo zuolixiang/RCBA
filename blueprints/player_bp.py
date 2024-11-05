@@ -457,12 +457,12 @@ def stat_league_header(year, as_json=True):
                     if player['name'] == '女生投篮':
                         continue
                     total_dict[player['name']] = total_dict.get(player['name'], 0) + int(player['total_points'])
-                    two_dict_tmp[player['name']][0] = + int(player['two_point_attempts'])
-                    two_dict_tmp[player['name']][1] = + int(player['two_point_makes'])
-                    three_dict_tmp[player['name']][0] = + int(player['three_point_attempts'])
-                    three_dict_tmp[player['name']][1] = + int(player['three_point_makes'])
-                    ft_dict_tmp[player['name']][0] = + int(player['ft_attempts'])
-                    ft_dict_tmp[player['name']][1] = + int(player['ft_makes'])
+                    two_dict_tmp[player['name']][0] += int(player['two_point_attempts'])
+                    two_dict_tmp[player['name']][1] += int(player['two_point_makes'])
+                    three_dict_tmp[player['name']][0] += int(player['three_point_attempts'])
+                    three_dict_tmp[player['name']][1] += int(player['three_point_makes'])
+                    ft_dict_tmp[player['name']][0] += int(player['ft_attempts'])
+                    ft_dict_tmp[player['name']][1] += int(player['ft_makes'])
             for k in two_dict_tmp:
                 two_dict[k] = two_dict_tmp[k][1]
 
