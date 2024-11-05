@@ -258,6 +258,35 @@ def enter_player_info():
     return render_template('enter_player_info.html')
 
 
+# 获取已录入的比赛用户信息
+@rcbaplayer.route('/get_player_data', methods=['GET'])
+def get_player_data():
+    year = request.args.get('year')
+    match_id = request.args.get('match_id')
+    team = request.args.get('team')
+    player_name = request.args.get('player_name')
+
+    # 加载 JSON 数据
+    with open(current_file_path + '/../data/match_statistics.json', 'r', encoding='utf-8') as file:
+        matches_data = json.load(file)
+
+    # 查找指定年份的比赛数据
+    year_data = matches_data.get(year, {})
+    match_data = next((m for m in year_data.get('matches', []) if m['match_id'] == match_id), None)
+
+    if not match_data:
+        return jsonify({'success': False, 'message': '未找到对应的比赛数据'})
+
+
+    players = match_data['match_info'].get('players', [])
+    # 查找球员数据
+    player_data = next((p for p in players if p['name'] == player_name and p['team'] == team), None)
+
+    if player_data:
+        return jsonify({'success': True, 'player_data': player_data})
+    else:
+        return jsonify({'success': False, 'message': '未找到该球员的比赛数据'})
+
 # 保存球员比赛信息数据
 @rcbaplayer.route('/update_player_data', methods=['POST'])
 def update_player_data():

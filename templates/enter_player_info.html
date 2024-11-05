@@ -192,7 +192,10 @@
             const yearSelect = document.getElementById('year_select');
             yearSelect.innerHTML = '';
 
-            Object.keys(matchesData).forEach(year => {
+            // 获取年份并按倒序排序
+            const sortedYears = Object.keys(matchesData).sort((a, b) => b - a);
+
+            sortedYears.forEach(year => {
                 const option = document.createElement('option');
                 option.value = year;
                 option.text = year;
@@ -245,6 +248,46 @@
                 guestOption.text = guestTeam;
                 teamSelect.appendChild(guestOption);
             }
+        }
+
+        // 检测球员姓名是否存在并自动填充数据
+        document.getElementById('player_name').addEventListener('blur', () => {
+            const year = document.getElementById('year_select').value;
+            const matchId = document.getElementById('match_select').value;
+            const team = document.getElementById('team_select').value;
+            const playerName = document.getElementById('player_name').value;
+
+            if (year && matchId && team && playerName) {
+                fetchPlayerData(year, matchId, team, playerName);
+            }
+        });
+
+        function fetchPlayerData(year, matchId, team, playerName) {
+            fetch(`/get_player_data?year=${year}&match_id=${matchId}&team=${team}&player_name=${playerName}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const playerData = data.player_data;
+                    // 更新输入框值
+                    document.getElementById('jersey_number').value = playerData.jersey_number || '';
+                    document.getElementById('two_point_attempts').value = playerData.two_point_attempts || 0;
+                    document.getElementById('two_point_makes').value = playerData.two_point_makes || 0;
+                    document.getElementById('three_point_attempts').value = playerData.three_point_attempts || 0;
+                    document.getElementById('three_point_makes').value = playerData.three_point_makes || 0;
+                    document.getElementById('ft_attempts').value = playerData.ft_attempts || 0;
+                    document.getElementById('ft_makes').value = playerData.ft_makes || 0;
+                    document.getElementById('fouls').value = playerData.fouls || 0;
+                    document.getElementById('total_points').value = playerData.total_points || 0;
+                } else {
+                    alert('未找到该球员的比赛数据');
+                }
+            })
+            .catch(error => console.error('Error fetching player data:', error));
         }
 
             // 自动计算总得分
