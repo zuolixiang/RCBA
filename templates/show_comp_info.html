@@ -112,7 +112,7 @@
             <!-- 比赛场次通过 JavaScript 动态加载 -->
         </select>
 
-        <button type="button" id="submit-btn">确定</button>
+{#        <button type="button" id="submit-btn">确定</button>#}
     </form>
 
     <!-- 数据表格 -->
@@ -166,7 +166,7 @@
             });
 
             // 监听 "确定" 按钮点击事件，手动获取比赛数据
-            $('#submit-btn').on('click', function() {
+            $('#match_round').on('change', function() {
                 const matchYear = $('#match_year').val();
                 const matchRound = $('#match_round').val();
                 fetchMatchData(matchYear, matchRound);
