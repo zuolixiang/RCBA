@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
     <title>查看历史数据</title>
     <style>
         body {
@@ -92,13 +93,13 @@
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 </head>
 <body>
-
-    <div class="navbar">
-        <ul class="nav-links">
-            <li><a href="{{ url_for('rcbaplayer.index') }}">首页</a></li>
-            <li><a href="#">历年比赛数据</a></li>
-        </ul>
-    </div>
+    {% include 'navbar.html' %}
+{#    <div class="navbar">#}
+{#        <ul class="nav-links">#}
+{#            <li><a href="{{ url_for('rcbaplayer.index') }}">首页</a></li>#}
+{#            <li><a href="#">历年比赛数据</a></li>#}
+{#        </ul>#}
+{#    </div>#}
 
     <!-- 筛选表单 -->
     <form id="filter-form">
