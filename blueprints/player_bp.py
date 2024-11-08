@@ -183,10 +183,13 @@ def data():
 
 @rcbaplayer.route('/data/add', methods=['GET'])
 def add_data():
-    # 检查用户是否已登录且是否为管理员
-    if session['username'] not in ('杨海力', '陆智卿', '赵永会'):
+    if 'username' not in session:
         return render_template('error.html')
-    return render_template('enter_info.html')
+    else:
+        # 检查用户是否已登录且是否为管理员
+        if session['username'] not in ('杨海力', '陆智卿', '赵永会'):
+            return render_template('error.html')
+        return render_template('enter_info.html')
 
 
 # 录入比赛基本信息页
