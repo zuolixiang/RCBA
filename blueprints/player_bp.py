@@ -480,6 +480,7 @@ def stat_league_header(year, as_json=True):
     ft_dict_tmp = defaultdict(lambda: [0, 0]) # 罚球统计
     ft_dict = {}  # 罚球命中数
     ft_rate_dict = {} # 罚球命中率
+    foul_dict = {} # 犯规次数
 
     if year in data.keys():
         if data[year]['matches']:
@@ -495,6 +496,7 @@ def stat_league_header(year, as_json=True):
                     three_dict_tmp[player['name']][1] += int(player['three_point_makes'])
                     ft_dict_tmp[player['name']][0] += int(player['ft_attempts'])
                     ft_dict_tmp[player['name']][1] += int(player['ft_makes'])
+                    foul_dict[player['name']] = foul_dict.get(player['name'], 0) + int(player['fouls'])
             for k in two_dict_tmp:
                 two_dict[k] = two_dict_tmp[k][1]
 
@@ -508,25 +510,34 @@ def stat_league_header(year, as_json=True):
             three_rate_dict = format_dict(three_dict_tmp, three_rate_dict)
             ft_rate_dict = format_dict(ft_dict_tmp, ft_rate_dict)
 
+
             total_list = sort_list(total_dict, False)
+            two_list = sort_list(two_dict, False)
             two_rate_list = sort_list(two_rate_dict, True)
             three_list = sort_list(three_dict, False)
             three_rate_list = sort_list(three_rate_dict, True)
             ft_list = sort_list(ft_dict, False)
             ft_rate_list = sort_list(ft_rate_dict, True)
+            foul_list = sort_list(foul_dict, False)
 
-            top_data = [{'metric': '得分', 'rankings': total_list[1:10], 'name': total_list[0]['name'],
-                         'score': total_list[0]['score']},
-                        {'metric': '两分命中率', 'rankings': two_rate_list[1:10], 'name': two_rate_list[0]['name'],
-                         'score': two_rate_list[0]['score']},
-                        {'metric': '三分命中数', 'rankings': three_list[1:10], 'name': three_list[0]['name'],
-                         'score': three_list[0]['score']},
-                        {'metric': '三分命中率', 'rankings': three_rate_list[1:10], 'name': three_rate_list[0]['name'],
-                         'score': three_rate_list[0]['score']},
-                        {'metric': '罚球命中数', 'rankings': ft_list[1:10], 'name': ft_list[0]['name'],
-                         'score': ft_list[0]['score']},
-                        {'metric': '罚球命中率', 'rankings': ft_rate_list[1:10], 'name': ft_rate_list[0]['name'],
-                         'score': ft_rate_list[0]['score']}]
+            top_data = [
+                {'metric': '总得分', 'rankings': total_list[1:10], 'name': total_list[0]['name'],
+                 'score': total_list[0]['score']},
+                {'metric': '两分命中率', 'rankings': two_rate_list[1:10], 'name': two_rate_list[0]['name'],
+                 'score': two_rate_list[0]['score']},
+                {'metric': '三分命中率', 'rankings': three_rate_list[1:10], 'name': three_rate_list[0]['name'],
+                 'score': three_rate_list[0]['score']},
+                {'metric': '罚球命中率', 'rankings': ft_rate_list[1:10], 'name': ft_rate_list[0]['name'],
+                 'score': ft_rate_list[0]['score']},
+                {'metric': '总犯规次数', 'rankings': foul_list[1:10], 'name': foul_list[0]['name'],
+                 'score': foul_list[0]['score']},
+                {'metric': '两分命中数', 'rankings': two_list[1:10], 'name': two_list[0]['name'],
+                 'score': two_list[0]['score']},
+                {'metric': '三分命中数', 'rankings': three_list[1:10], 'name': three_list[0]['name'],
+                 'score': three_list[0]['score']},
+                {'metric': '罚球次数', 'rankings': ft_list[1:10], 'name': ft_list[0]['name'],
+                 'score': ft_list[0]['score']}
+            ]
 
     if as_json:
         return jsonify({'data': top_data})
