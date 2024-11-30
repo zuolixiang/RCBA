@@ -22,32 +22,55 @@
             z-index: 15; /* 提高下拉菜单的层级 */
         }
         .carousel {
-            width: 65%; /* 调整轮播图宽度 */
+            width: 85%; /* 调整轮播图宽度 */
             margin: 0 auto; /* 居中对齐 */
             position: relative; /* 使箭头定位有效 */
+            overflow: hidden; /* 防止内容溢出 */
         }
 
+        /* 统一图片样式，保留原比例 */
+        .carousel img {
+            width: 100%; /* 自适应宽度 */
+            height: auto; /* 保持图片原始比例 */
+            display: block; /* 防止 inline 元素影响布局 */
+        }
+        /* 首图单独样式 */
+        .carousel img:first-child {
+            height: 600px; /* 保持原比例高度 */
+            {#max-height: 600px; /* 限制最大高度 */#}
+            object-fit: contain; /* 保留完整宽度，黑边填充 */
+            background-color: #f4f4f4; /* 背景颜色可以自定义 */
+        }
+
+        /* 其他图片样式 */
+        .carousel img:not(:first-child) {
+            height: 600px; /* 固定高度，保持轮播图一致性 */
+            object-fit: cover; /* 填充容器，允许裁剪 */
+        }
+
+        /* 调整箭头的样式和层级 */
         .slick-prev, .slick-next {
-            font-size: 2rem;
-            color: black; /* 可以根据需求更改颜色 */
-            z-index: 1;
+            font-size: 2rem; /* 调整箭头大小 */
+            color: black; /* 根据需求设置颜色 */
+            z-index: 10; /* 提高层级，确保箭头在图片之上 */
+            background: rgba(255, 255, 255, 0.5); /* 增加背景半透明效果 */
+            border-radius: 50%; /* 设置圆形按钮 */
+            width: 40px; /* 按钮宽度 */
+            height: 40px; /* 按钮高度 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* 调整箭头的位置，确保不会与图片重叠 */
+        /* 调整箭头的位置，防止被图片内容遮挡 */
         .slick-prev {
-            left: -40px;
+            left: 10px; /* 与左边距保持适当距离 */
         }
 
         .slick-next {
-            right: -40px;
+            right: 10px; /* 与右边距保持适当距离 */
         }
 
-        /* 调整图片样式，防止图片与箭头重叠 */
-        .carousel img {
-            width: 100%; /* 确保图片自适应轮播图的宽度 */
-            height: auto;
-            display: block;
-        }
     </style>
 </head>
 <body>
@@ -101,6 +124,7 @@
 
     <!-- 轮播图 -->
     <div class="carousel">
+        <a href="#"><img src="../static/carousel/hezhao.jpg" alt="合照">
         <a href="{{ url_for('rcbaplayer.comp_team_detail', captain='庞义卓') }}"><img src="../static/carousel/wukong.jpeg" alt="庞义卓">
         <a href="{{ url_for('rcbaplayer.comp_team_detail', captain='冉孟鑫') }}"><img src="../static/carousel/jifeng.jpeg" alt="冉孟鑫">
         <a href="{{ url_for('rcbaplayer.comp_team_detail', captain='申时行') }}"><img src="../static/carousel/daoxiang.jpeg" alt="申时行">
@@ -129,6 +153,26 @@
                 nextArrow: '<button type="button" class="slick-next">&#8250;</button>'
             });
         });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const carousel = document.querySelector('.carousel');
+
+            if (carousel) {
+                // 获取所有图片并监听加载
+                const images = carousel.querySelectorAll('img');
+                let maxHeight = 0;
+
+                images.forEach(img => {
+                    img.onload = function () {
+                        maxHeight = Math.max(maxHeight, img.offsetHeight);
+                        carousel.style.height = `${maxHeight}px`; // 更新容器高度
+                    };
+                });
+            }
+        });
+
     </script>
 </body>
 </html>
